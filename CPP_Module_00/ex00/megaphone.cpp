@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hqureshi <hqureshi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/27 11:54:40 by hqureshi          #+#    #+#             */
+/*   Updated: 2022/09/27 11:54:41 by hqureshi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 
 void	megaphone(int argc, char **argv)
@@ -18,6 +30,7 @@ void	megaphone(int argc, char **argv)
 		i++;
 		argc--;
 	}
+	std::cout << std::endl;
 }
 
 int	main(int argc, char **argv) {

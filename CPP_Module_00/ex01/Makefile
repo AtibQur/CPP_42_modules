@@ -1,16 +1,17 @@
-NAME		= megaphone
+NAME		= phonebook
 
 CC			= c++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 
-SRCS		= ./megaphone.cpp
+SRCS		= ./phonebook.cpp
+INC			= ./phonebook.hpp
 OBJS		= $(SRCS:%.cpp=%.o)
 
 all:		$(NAME)
 
 $(NAME):	$(SRCS)
 		$(CC) $(CPPFLAGS) $(SRCS) -o $(NAME)
-		@echo "\033[0;32mTime to be LOUD!\033[0m"
+		@echo "\033[0;32mTime to create a phonebook!\033[0m"
 
 clean:
 		@rm -f $(OBJS)
