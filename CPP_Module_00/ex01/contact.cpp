@@ -1,4 +1,5 @@
 #include "contact.hpp"
+#include <iomanip>
 
 Contact::Contact() {
     FirstName = "Empty";
@@ -55,4 +56,12 @@ void    Contact::InitContacts(void)
         }
         std::cout << "Enter your Darkest secret 😈:" << std::endl;
         std::cin >> Contact::DarkestSecret;
+}
+
+void    Contact::ShowContacts(int i) {
+    std::cout << std::setw(3) << i;
+    std::cout << std::setw(12) << Contact::FirstName;
+    std::cout << std::setw(14) << Contact::LastName;
+    std::cout << std::setw(14) << Contact::NickName << std::endl;
+
 }

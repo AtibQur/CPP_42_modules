@@ -6,6 +6,7 @@ class Contact
         Contact();
         void InitContacts(void);
         void SearchContacts(void);
+        void ShowContacts(int i);
 
     private:
         std::string	FirstName;

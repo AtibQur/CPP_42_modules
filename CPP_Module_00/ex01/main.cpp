@@ -22,9 +22,11 @@ int	main(void) {
 			phonebook.add(i);
 			i++;
 		}
-		// if (option == "SEARCH") {
-		// 	phonebook.search();
-		// }
+		if (option == "SEARCH") {
+			std::cout << "Index     Firstname     Lastname      Nickname" << std::endl;
+			phonebook.search();
+			return (0);
+		}
 	}
 	return (0);
 }
