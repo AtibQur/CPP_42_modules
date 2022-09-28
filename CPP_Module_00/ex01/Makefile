@@ -3,8 +3,10 @@ NAME		= phonebook
 CC			= c++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 
-SRCS		= ./phonebook.cpp
-INC			= ./phonebook.hpp
+SRCS		= 	./main.cpp	\
+				./phonebook.cpp \
+				./contact.cpp
+
 OBJS		= $(SRCS:%.cpp=%.o)
 
 all:		$(NAME)
