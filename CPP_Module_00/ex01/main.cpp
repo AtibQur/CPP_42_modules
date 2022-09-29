@@ -1,12 +1,12 @@
 #include <iostream>
+#include <iomanip>
 #include "./phonebook.hpp"
 
 void	WelcomeMessage(void) {
-	// std::cout << "Welcome to your phonebook! Type one of the following options:" \
-	// CYAN	"\n1. \"ADD\" to add a contact"\
-	// PURPLE	"\n2. \"SEARCH\" to search a contact"\
-	// RED		"\n3. \"EXIT\" your phonebook \033[0;30m"; std::cout << std::endl;
-	std::cout << "You can start!" << std::endl;
+	std::cout << 
+			"\n\033[0;36m1. \"ADD\" to add a contact"\
+			"\n\033[0;35m2. \"SEARCH\" to search a contact"\
+			"\n\033[0;32m3. \"EXIT\" your phonebook \033[0;30m"; std::cout << std::endl;
 }
 
 int	main(void) {
@@ -14,19 +14,24 @@ int	main(void) {
 	std::string	option;
 	int			i = 0;
 
-	WelcomeMessage();
+	std::cout << "Welcome to your phonebook! Type one of the following options:"; 
 	while (1)
 	{
+		WelcomeMessage();
 		std::cin >> option;
 		if (option == "ADD") {
 			phonebook.add(i);
 			i++;
+			i = i%8;
 		}
-		if (option == "SEARCH") {
-			std::cout << "Index     Firstname     Lastname      Nickname" << std::endl;
+		else if (option == "SEARCH") {
+			std::cout << "Index       Firstname     Lastname      Nickname" << std::endl;
 			phonebook.search();
-			return (0);
 		}
+		else if (option == "EXIT")
+			exit(0);
+		else
+			std::cout << "Wrong input, Would you like to ADD, SEARCH or EXIT?";
 	}
 	return (0);
 }

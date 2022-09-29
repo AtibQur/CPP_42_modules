@@ -1,6 +1,10 @@
 #include "contact.hpp"
 #include <iomanip>
 
+void    Contact::ViewContact() {
+    std::cout << Contact::FirstName << std::endl;
+}
+
 Contact::Contact() {
     FirstName = "Empty";
     LastName = "Empty";
@@ -60,8 +64,7 @@ void    Contact::InitContacts(void)
 
 void    Contact::ShowContacts(int i) {
     std::cout << std::setw(3) << i;
-    std::cout << std::setw(12) << Contact::FirstName;
-    std::cout << std::setw(14) << Contact::LastName;
-    std::cout << std::setw(14) << Contact::NickName << std::endl;
-
+    std::cout << std::setw(14) << Contact::FirstName;
+    std::cout << std::setw(15) << Contact::LastName;
+    std::cout << std::setw(15) << Contact::NickName << std::endl;
 }
