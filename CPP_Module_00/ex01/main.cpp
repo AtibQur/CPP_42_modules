@@ -29,9 +29,8 @@ int	main(void) {
 			phonebook.search();
 		}
 		else if (option == "EXIT")
-			exit(0);
+			return (0);
 		else
 			std::cout << "Wrong input, Would you like to ADD, SEARCH or EXIT?";
 	}
-	return (0);
 }
