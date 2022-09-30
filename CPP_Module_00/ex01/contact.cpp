@@ -1,6 +1,14 @@
 #include "contact.hpp"
 #include <iomanip>
 
+Contact::Contact() {
+    FirstName = "Empty";
+    LastName = "Empty";
+    NickName = "Empty";
+	PhoneNumber = "Empty";
+	DarkestSecret = "Empty";
+}
+
 void    Contact::ViewContact(int i) {
 		std::cout << "Digit: [" << i << "]\n";
     	std::cout << "Firstname: "<< Contact::FirstName << "\n";
@@ -35,14 +43,6 @@ void    Contact::ShowContacts(int i) {
 		Truncate(Contact::NickName);
 		std::cout << std::endl;
 	}
-}
-
-Contact::Contact() {
-    FirstName = "Empty";
-    LastName = "Empty";
-    NickName = "Empty";
-	PhoneNumber = "Empty";
-	DarkestSecret = "Empty";
 }
 
 int	CheckCorrectAnswer(std::string str, std::string info, int num)
