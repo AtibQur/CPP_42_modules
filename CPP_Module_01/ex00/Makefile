@@ -1,4 +1,4 @@
-NAME		= brainz
+NAME		= zombies
 
 CC			= c++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
@@ -6,8 +6,7 @@ CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 SRCS		= 	./src/main.cpp \
 				./src/Zombie.cpp \
 				./src/newZombie.cpp \
-				./src/randomChump.cpp \
-				
+				./src/randomChump.cpp
 
 OBJS		= $(SRCS:%.cpp=%.o)
 
