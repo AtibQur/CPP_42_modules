@@ -1,14 +1,48 @@
 #include "contact.hpp"
 #include <iomanip>
 
-void    Contact::ViewContact() {
-    std::cout << Contact::FirstName << std::endl;
+void    Contact::ViewContact(int i) {
+		std::cout << "Digit: [" << i << "]\n";
+    	std::cout << "Firstname: "<< Contact::FirstName << "\n";
+    	std::cout << "lastname: " << Contact::LastName << "\n";
+		std::cout << "Nickname: " << Contact::NickName << "\n";
+		std::cout << "Phonenumber: " << Contact::PhoneNumber << "\n";
+		std::cout << "Darkest secret: " << Contact::DarkestSecret << "\n";
+}
+
+// if one of the names has more than 10 chars
+// than truncate the last char and place a dot '.'
+void	Contact::Truncate(std::string str) {
+
+	for (int i = 0; i <= 9; i++)
+		std::cout << str[i];
+	std::cout << ".|";
+}
+
+void    Contact::ShowContacts(int i) {
+    std::cout << std::setw(3) << '[' << i << "]|";
+	if (Contact::FirstName.length() <= 10)
+    	std::cout << std::setw(11) << Contact::FirstName << "|";
+	else
+		Truncate(Contact::FirstName);
+	if (Contact::LastName.length() <= 10)
+    	std::cout << std::setw(11) << Contact::LastName << "|";
+	else
+		Truncate(Contact::LastName);
+	if (Contact::NickName.length() <= 10)
+    	std::cout << std::setw(11) << Contact::NickName << "|" << std::endl;
+	else {
+		Truncate(Contact::NickName);
+		std::cout << std::endl;
+	}
 }
 
 Contact::Contact() {
     FirstName = "Empty";
     LastName = "Empty";
     NickName = "Empty";
+	PhoneNumber = "Empty";
+	DarkestSecret = "Empty";
 }
 
 int	CheckCorrectAnswer(std::string str, std::string info, int num)
@@ -60,11 +94,4 @@ void    Contact::InitContacts(void)
         }
         std::cout << "Enter your Darkest secret 😈:" << std::endl;
         std::cin >> Contact::DarkestSecret;
-}
-
-void    Contact::ShowContacts(int i) {
-    std::cout << std::setw(3) << i;
-    std::cout << std::setw(14) << Contact::FirstName;
-    std::cout << std::setw(15) << Contact::LastName;
-    std::cout << std::setw(15) << Contact::NickName << std::endl;
 }

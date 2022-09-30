@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iomanip>
 #include "./phonebook.hpp"
 
 void	WelcomeMessage(void) {
@@ -25,7 +24,7 @@ int	main(void) {
 			i = i%8;
 		}
 		else if (option == "SEARCH") {
-			std::cout << "Index       Firstname     Lastname      Nickname" << std::endl;
+			std::cout << "Index|  Firstname|   Lastname|   Nickname|" << std::endl;
 			phonebook.search();
 		}
 		else if (option == "EXIT")

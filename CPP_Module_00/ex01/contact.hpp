@@ -4,10 +4,11 @@ class Contact
 {
     public:
         Contact();
-        void InitContacts(void);
-        void SearchContacts(void);
-        void ShowContacts(int i);
-        void ViewContact(void);
+        void    InitContacts(void);
+        void    SearchContacts(void);
+        void    ViewContact(int i);
+        void    ShowContacts(int i);
+        void    Truncate(std::string str);
 
     private:
         std::string	FirstName;
