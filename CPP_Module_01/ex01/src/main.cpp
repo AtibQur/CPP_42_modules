@@ -14,10 +14,8 @@ int main(void) {
         std::cout << '[' << i << ']';
         newZombie[i].announce();
     }
-        // delete[] newZombie;
+        delete[] newZombie;
     std::cout << std::endl;
-    newZombie = zombieHorde(size, name);
-
 
     name = "Sabb";
     size = 5;
@@ -44,9 +42,7 @@ int main(void) {
     delete[] newZombie;
     std::cout << std::endl;
 
-    // check for leaks
-    // Zombie *newzombies = new Zombie;
-    // newzombies->announce();
-    // system("leaks zombies");
+    Zombie *newzombies = new Zombie;
+    newzombies->announce();
     return (0);
 }
