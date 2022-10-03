@@ -14,7 +14,7 @@ int main(void) {
         std::cout << '[' << i << ']';
         newZombie[i].announce();
     }
-        delete[] newZombie;
+    delete[] newZombie;
     std::cout << std::endl;
 
     name = "Sabb";
@@ -40,9 +40,6 @@ int main(void) {
         newZombie[i].announce();
     }
     delete[] newZombie;
-    std::cout << std::endl;
 
-    Zombie *newzombies = new Zombie;
-    newzombies->announce();
     return (0);
 }
