@@ -1,10 +1,6 @@
 #include "../inc/Zombie.hpp"
 
 int main(void) {
-	std::cout << "Creating the third zombie \"Sab\" with randomChump and Sab will announce itself" << std::endl;
-	{
-		randomChump("Sab");
-	}
     std::cout << "Creating the first zombie with the name Foo:" << std::endl;
     {
     	Zombie Foo("Foo");
@@ -16,5 +12,9 @@ int main(void) {
 		peter->announce();
 		delete peter;
     }
+	std::cout << "Creating the third zombie \"Sab\" with randomChump and Sab will announce itself" << std::endl;
+	{
+		randomChump("Sab");
+	}
     return (0);
 }
