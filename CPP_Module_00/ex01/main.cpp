@@ -17,7 +17,7 @@ int	main(void) {
 	while (1)
 	{
 		WelcomeMessage();
-		std::cin >> option;
+		std::getline(std::cin, option);
 		if (option == "ADD") {
 			phonebook.add(i);
 			i++;

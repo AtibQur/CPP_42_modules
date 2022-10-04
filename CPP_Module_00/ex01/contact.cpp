@@ -2,11 +2,11 @@
 #include <iomanip>
 
 Contact::Contact() {
-    FirstName = "Empty";
-    LastName = "Empty";
-    NickName = "Empty";
-	PhoneNumber = "Empty";
-	DarkestSecret = "Empty";
+    this->FirstName = "Empty";
+    this->LastName = "Empty";
+    this->NickName = "Empty";
+	this->PhoneNumber = "Empty";
+	this->DarkestSecret = "Empty";
 }
 
 void    Contact::ViewContact(int i) {
@@ -49,6 +49,7 @@ int	CheckCorrectAnswer(std::string str, std::string info, int num)
 {
 	int		i = 0;
 
+	std::cout << ">" << str << "<\n";
 	while (str[i] && num == 0) {
 		if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')) {
 				std::cout << info << " should only contain characters" << std::endl;
@@ -69,29 +70,29 @@ int	CheckCorrectAnswer(std::string str, std::string info, int num)
 void    Contact::InitContacts(void)
 {
         std::cout << "Enter your first name:" << std::endl;
-        std::cin >> Contact::FirstName;
-        while (CheckCorrectAnswer(FirstName, "First name", 0) != 0) {
+		std::getline(std::cin, Contact::FirstName);
+        while (CheckCorrectAnswer(this->FirstName, "First name", 0) != 0) {
             std::cout << "Enter your first name:" << std::endl;
-            std::cin >> Contact::FirstName;
+            std::getline(std::cin, this->FirstName);
         }
         std::cout << "Enter your last name:" << std::endl;
-        std::cin >> Contact::LastName;
-        while (CheckCorrectAnswer(Contact::LastName, "Last name", 0) != 0) {
+		std::getline(std::cin, this->LastName);
+        while (CheckCorrectAnswer(this->LastName, "Last name", 0) != 0) {
             std::cout << "Enter your last name:" << std::endl;
-            std::cin >> Contact::LastName;
+            std::getline(std::cin, this->LastName);
         }
         std::cout << "Enter your nick name:" << std::endl;
-        std::cin >> Contact::NickName;
-        while (CheckCorrectAnswer(Contact::NickName, "Nick name", 0) != 0) {
+		std::getline(std::cin, this->NickName);
+        while (CheckCorrectAnswer(this->NickName, "Nick name", 0) != 0) {
             std::cout << "Enter your nick name" << std::endl;
-            std::cin >> Contact::NickName;
+            std::getline(std::cin, this->NickName);
         }
         std::cout << "Enter your phone number:" << std::endl;
-        std::cin >> Contact::PhoneNumber;
-        while (CheckCorrectAnswer(Contact::PhoneNumber, "Phone number", 1) != 0) {
+		std::getline(std::cin, this->PhoneNumber);
+        while (CheckCorrectAnswer(this->PhoneNumber, "Phone number", 1) != 0) {
             std::cout << "Enter your phone number:" << std::endl;
-            std::cin >> Contact::PhoneNumber;
+            std::getline(std::cin, this->PhoneNumber);
         }
         std::cout << "Enter your Darkest secret 😈:" << std::endl;
-        std::cin >> Contact::DarkestSecret;
+        std::getline(std::cin, this->DarkestSecret);
 }

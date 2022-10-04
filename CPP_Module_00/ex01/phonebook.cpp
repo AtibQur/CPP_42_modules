@@ -14,9 +14,9 @@ void    PhoneBook::search() {
     }
     i = 0;
     std::cout << "Which contact would you like to see? Choose between 0 and 7:" << std::endl;
-    std::cin >> option;
-    if (option >= "0" && option <= "7")
-		contacts[std::stoi(option)].ViewContact(std::stoi(option));
+    std::getline(std::cin, option);
+    if ((option >= "0" && option <= "7") && (std::stoi(option) >= 0 && std::stoi(option) <= 7))
+		  contacts[std::stoi(option)].ViewContact(std::stoi(option));
     else
-		std::cout << option << " is not a valid option";
+		  std::cout << option << " is not a valid option";
 }
