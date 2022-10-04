@@ -4,16 +4,22 @@ Weapon::Weapon() {
 }
 
 Weapon::Weapon(std::string type) {
-    Weapon::type = type;
+    if (type != "\0")
+        Weapon::type = type;
+    else
+        Weapon::type = "fists";
 }
 
 Weapon::~Weapon() {
 }
 
-std::string Weapon::getType(void) {
-    return (type);
+const std::string Weapon::getType(void) {
+    return (this->type);
 }
 
 void        Weapon::setType(std::string setType) {
-    Weapon::type = setType;
+    if (setType != "\0")
+        this->type = setType;
+    else
+        this->type = "fists";
 }
