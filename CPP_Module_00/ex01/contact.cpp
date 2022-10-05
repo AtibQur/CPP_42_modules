@@ -10,12 +10,14 @@ Contact::Contact() {
 }
 
 void    Contact::ViewContact(int i) {
-		std::cout << "Digit: [" << i << "]\n";
-    	std::cout << "Firstname: "<< Contact::FirstName << "\n";
-    	std::cout << "lastname: " << Contact::LastName << "\n";
-		std::cout << "Nickname: " << Contact::NickName << "\n";
-		std::cout << "Phonenumber: " << Contact::PhoneNumber << "\n";
-		std::cout << "Darkest secret: " << Contact::DarkestSecret << "\n";
+		std::cout << "############################################################\n";
+		std::cout << std::setw(16) << "Digit: [" << i << "]\n";
+    	std::cout << std::setw(15) << "Firstname: " << Contact::FirstName << "\n";
+    	std::cout<< std::setw(15)  << "Lastname: " << Contact::LastName << "\n";
+		std::cout << std::setw(15) << "Nickname: " << Contact::NickName << "\n";
+		std::cout << std::setw(15) << "Phonenumber: " << Contact::PhoneNumber << "\n";
+		std::cout << std::setw(15) << "Dark secret: " << Contact::DarkestSecret << "\n";
+		std::cout << "############################################################\n";
 }
 
 // if one of the names has more than 10 chars
@@ -49,7 +51,10 @@ int	CheckCorrectAnswer(std::string str, std::string info, int num)
 {
 	int		i = 0;
 
-	std::cout << ">" << str << "<\n";
+	if (str.length() == 0) {
+		std::cout << "Please try again" << std::endl;
+		return (1);
+	}
 	while (str[i] && num == 0) {
 		if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z')) {
 				std::cout << info << " should only contain characters" << std::endl;
@@ -94,5 +99,5 @@ void    Contact::InitContacts(void)
             std::getline(std::cin, this->PhoneNumber);
         }
         std::cout << "Enter your Darkest secret 😈:" << std::endl;
-        std::getline(std::cin, this->DarkestSecret);
+		std::getline(std::cin, this->DarkestSecret);
 }
