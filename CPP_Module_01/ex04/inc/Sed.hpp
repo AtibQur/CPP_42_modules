@@ -10,15 +10,12 @@ class Sed
         Sed();
         ~Sed();
 
-        void    SearchString(char **argv);
         void    ReplaceString(char **argv);
+        void    SearchString(char **argv);
 
     private:
-        std::string FileName;
-        std::string SearchName;
-        std::string ReplaceName;
 };
-
+    void    ReplaceString(char **argv);
     void    SearchString(char **argv);
 
 #endif

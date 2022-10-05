@@ -1,8 +1,7 @@
 #include "../inc/Sed.hpp"
 
 int main(int argc, char **argv) {
-
-	std::fstream file;
+	Sed replace;
 
 	if (argc != 4) {
 		std::cout << "Error, please try again with 3 arguments." << std::endl;
@@ -11,7 +10,7 @@ int main(int argc, char **argv) {
 	}
 	else
 	{
-		file.open(argv[1]);
+		replace.SearchString(argv);
 		return (0);
 	}
 }
