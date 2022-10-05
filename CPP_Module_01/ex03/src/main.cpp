@@ -14,7 +14,6 @@ int main()
     bob.attack();
     std::cout << std::endl;
     }
-
     // HumanB makes use of a pointer for the weapon
     {
     Weapon club = Weapon("wooden bat");
@@ -26,7 +25,6 @@ int main()
     jim.attack();
     std::cout << std::endl;
     }
-
     // Sab does not use a weapon and instead gets to use fists
     {
     Weapon club = Weapon("");
@@ -37,6 +35,5 @@ int main()
     club.setType("");
     sab.attack();
     }
-
     return 0;
 }
