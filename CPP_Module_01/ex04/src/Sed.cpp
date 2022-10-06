@@ -1,13 +1,26 @@
 #include "../inc/Sed.hpp"
 
-// void    ChangeString()
+std::string Sed::ChangeString(std::string line, std::string replace) {
+	// int	i = 0;
+	size_t	j = line.find(replace, 1);
+	if (j != std::string::npos)
+		std::cout << line <<j << std::endl;
+	// int k = 0;
+	// int l = 0;
+	// std::string tmp;
 
-// int	Sed::CheckString(std::string line, std::string toFind) {
 
 
-	
-// 	return (0);
-// }
+	return (line);
+}
+
+int	Sed::CheckString(std::string line, std::string toFind) {
+	bool found = line.find(toFind) != std::string::npos;
+	if (found)
+		return (1);
+	else
+		return (0);
+}
 
 void    Sed::ReplaceString(char **argv) {
     std::string     line;
@@ -20,13 +33,10 @@ void    Sed::ReplaceString(char **argv) {
         return ;
     }
     while (getline(file, line)) {
-        // if (CheckString(line, argv[2]) == true)
-		// {
-		// 	std::cout << "gang\n";
-        //     line = argv[3];
-		// }
-		if (line == argv[2])
-            line = argv[3];
+        if (CheckString(line, argv[2]) == true)
+		{
+            line = ChangeString(line, argv[3]);
+		}
         fileReplaced << line;
         if (file.eof() == false)
             fileReplaced << '\n';
