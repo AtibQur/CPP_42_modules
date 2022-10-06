@@ -1,10 +1,18 @@
 #include "../inc/Sed.hpp"
 
+// void    ChangeString()
+
+// int	Sed::CheckString(std::string line, std::string toFind) {
+
+
+	
+// 	return (0);
+// }
 
 void    Sed::ReplaceString(char **argv) {
     std::string     line;
     std::fstream    file;
-    std::ofstream    fileReplaced("text.replace");
+    std::ofstream   fileReplaced("text.replace");
 
     file.open(argv[1], std::ios::in | std::ios::out);
     if (!file.is_open()) {
@@ -12,33 +20,21 @@ void    Sed::ReplaceString(char **argv) {
         return ;
     }
     while (getline(file, line)) {
-        if (line == argv[2])
+        // if (CheckString(line, argv[2]) == true)
+		// {
+		// 	std::cout << "gang\n";
+        //     line = argv[3];
+		// }
+		if (line == argv[2])
             line = argv[3];
-        fileReplaced << line << std::endl;
+        fileReplaced << line;
+        if (file.eof() == false)
+            fileReplaced << '\n';
     }
     file.close();
     fileReplaced.close();
 }
 
-void    Sed::SearchString(char **argv) {
-    std::fstream    file;
-    std::string     line;
-    std::string     temp;
+Sed::~Sed() {}
 
-    file.open(argv[1], std::ios::in | std::ios::out);
-    if (!file.is_open()) {
-        std::cout << "Failed to open or use the file. Please check your file." << std::endl;
-        exit(1);
-    }
-    while (getline(file, line)) {
-        if (line == argv[2])
-            ReplaceString(argv);
-    }
-    file.close();
-}
-
-Sed::~Sed() {
-}
-
-Sed::Sed() {
-}
+Sed::Sed() {}

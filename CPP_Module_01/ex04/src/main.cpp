@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
 	}
 	else
 	{
-		replace.SearchString(argv);
+		replace.ReplaceString(argv);
 		return (0);
 	}
 }
