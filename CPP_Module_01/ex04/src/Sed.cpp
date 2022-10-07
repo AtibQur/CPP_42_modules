@@ -1,17 +1,21 @@
 #include "../inc/Sed.hpp"
 
-std::string Sed::ChangeString(std::string line, std::string replace) {
-	// int	i = 0;
-	size_t	j = line.find(replace, 1);
-	if (j != std::string::npos)
-		std::cout << line <<j << std::endl;
-	// int k = 0;
-	// int l = 0;
-	// std::string tmp;
+std::string Sed::ChangeString(std::string line, std::string toFind, std::string replace) {
+    std::string tmp;
+    size_t i = 0;
+    size_t end = 0;
+    
+    while (1) {
+        end = line.find(toFind, i);             //Find index pos of toFind
+        if (end == std::string::npos)           //Check with npos if Find has found
+            break;                              
 
-
-
-	return (line);
+        tmp.append(line, i, end - i);           //Add everything before toFind to the string
+        i = end + toFind.size();                //get new index size to change next toFind
+        tmp.append(replace);                    //Add replace to the string
+    }
+        tmp.append(line, i);                    //Add the rest after of the string after toFind
+    return (tmp);
 }
 
 int	Sed::CheckString(std::string line, std::string toFind) {
@@ -35,7 +39,7 @@ void    Sed::ReplaceString(char **argv) {
     while (getline(file, line)) {
         if (CheckString(line, argv[2]) == true)
 		{
-            line = ChangeString(line, argv[3]);
+            line = ChangeString(line, argv[2], argv[3]);
 		}
         fileReplaced << line;
         if (file.eof() == false)
