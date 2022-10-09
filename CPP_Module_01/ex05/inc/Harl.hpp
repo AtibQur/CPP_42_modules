@@ -17,6 +17,7 @@ class Harl
         void warning(void);
         void error(void);
 
+        typedef void (Harl::*func_ptr)();
 };
 
 #endif
