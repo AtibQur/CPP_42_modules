@@ -68,6 +68,6 @@ void Harl::error(void) {
 }
 
 void Harl::insignificantProblem(void) {
-    std::cout << "\033[1;32m[ INSIGNIFICANT PROBLEM ]\033[0m" << std::endl;
+    std::cout << "\033[1;31m[ INSIGNIFICANT PROBLEM ]\033[0m" << std::endl;
     std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 }
