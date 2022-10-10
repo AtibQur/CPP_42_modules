@@ -5,7 +5,8 @@ Harl::Harl() {}
 Harl::~Harl() {}
 
 void    Harl::complain(std::string level) {
-    const int cLevel = 4;
+    const int cLevel = 5;
+    int SwitchLevel = 0;
 
     std::string ComplainLevel[cLevel] = {
         "DEBUG", "INFO", "WARNING", "ERROR"
@@ -16,16 +17,34 @@ void    Harl::complain(std::string level) {
         &Harl::debug,
         &Harl::info,
         &Harl::warning,
-        &Harl::error
+        &Harl::error,
+        &Harl::insignificantProblem
     };
 
     for (int i = 0; i < cLevel; i++) {
         if (ComplainLevel[i].compare(level) == 0) {
-           (this->*(ArrayOfLevels[i]))();
-            return ;
+            break ;
         }
+        SwitchLevel++;
     }
-    std::cerr << "\033[1;31m[ Wrong input ]\033[0m\nTry: DEBUG, INFO, WARNING, ERROR" << std::endl;
+
+    switch(SwitchLevel)
+    {
+        case 0:
+            (this->*(ArrayOfLevels[0]))();
+            break;
+        case 1:
+            (this->*(ArrayOfLevels[1]))();
+            break;
+        case 2:
+            (this->*(ArrayOfLevels[2]))();
+            break;
+        case 3:
+            (this->*(ArrayOfLevels[3]))();
+            break;
+        default:
+            (this->*(ArrayOfLevels[4]))();
+    }       
 }
 
 void Harl::debug(void) {
@@ -46,4 +65,9 @@ void Harl::warning(void) {
 void Harl::error(void) {
     std::cout << "\033[1;32m[ ERROR ]\033[0m" << std::endl;
     std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
+}
+
+void Harl::insignificantProblem(void) {
+    std::cout << "\033[1;32m[ INSIGNIFICANT PROBLEM ]\033[0m" << std::endl;
+    std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 }
