@@ -1,4 +1,4 @@
-NAME		= orthodoxClass
+NAME		= fixed
 
 CC			= c++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
