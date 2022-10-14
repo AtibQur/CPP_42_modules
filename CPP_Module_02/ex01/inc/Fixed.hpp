@@ -13,6 +13,9 @@ class Fixed
 
     Fixed &operator=(const Fixed &fixedCopy);
 
+    float toFloat(void) const;
+    int   toInt(void) const;
+
     private:
         int              fixedPointNum;
         static const int fractBits = 8;
