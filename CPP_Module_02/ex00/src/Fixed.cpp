@@ -25,7 +25,6 @@ Fixed& Fixed::operator=(const Fixed &fixedCopy) {
         this->fixedNum = fixedCopy.fixedNum;
     }
     return (*this);
-
 }
 
 int Fixed::getRawBits(void) const {
