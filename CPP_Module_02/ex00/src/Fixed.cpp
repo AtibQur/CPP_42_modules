@@ -8,6 +8,7 @@ Fixed::Fixed() {
 }
 
 // copy constructor
+// is called when new object is created from existing one
 Fixed::Fixed(const Fixed &fixedcopy) {
     std::cout << "Copy constructor called" << std::endl;
     fixedNum = fixedcopy.fixedNum;
@@ -19,6 +20,8 @@ Fixed::~Fixed() {
 }
 
 // copy assignment operator overload
+// is called when an already initiliazed object is assigned a new value from
+// another existing object
 Fixed& Fixed::operator=(const Fixed &fixedCopy) {
     std::cout << "Copy assignement operator called" << std::endl;
     if (&fixedCopy != this) {
