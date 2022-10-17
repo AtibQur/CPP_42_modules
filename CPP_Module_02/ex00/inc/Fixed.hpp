@@ -13,7 +13,8 @@ class Fixed
         Fixed &operator=(const Fixed &fixedCopy);
 
         int getRawBits(void) const;
-        void setRawBits(int const raw);
+        void setRawBits(int const rawBits);
+
     private:
         int              fixedNum;
         static const int fractBits = 8;

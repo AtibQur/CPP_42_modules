@@ -9,13 +9,18 @@ Fixed::Fixed() {
 // Const integer value constructor
 Fixed::Fixed(const int bitValue) {
     std::cout << "Int constructor called" << std::endl;
-    this->fixedPointNum = bitValue;
+    this->fixedPointNum = bitValue << Fixed::fixedPointNum;
 }
 
 // Const float value constructor
 Fixed::Fixed(const float bitValue) {
     std::cout << "Float constructor called" << std::endl;
-    this->fixedPointNum = bitValue;
+    this->fixedPointNum = roundf(2.3 bitValue);
+}
+
+Fixed::Fixed(const Fixed &fixedcopy) {
+    std::cout << "Copy constructor called" << std::endl;
+    this->fixedPointNum = fixedcopy.fixedPointNum;
 }
 
 // Destructor
@@ -23,11 +28,13 @@ Fixed::~Fixed() {
     std::cout << "Destructor called" << std::endl;
 }
 
-//Copy assignment operator constructor
-Fixed& Fixed::operator=(const Fixed &fixedCopy) {
-    std::cout << "Copy assignement operator called" << std::endl;
-    if (&fixedCopy != this) {
-        this->fixedPointNum = fixedCopy.fixedPointNum;
-    }
-    return (*this);
+
+
+float Fixed::toFloat(void) const {
+    return (float(this->fixedPointNum));
+}
+
+std::ostream &operator << (std::ostream &out, const Fixed &obj) {
+    out << obj.toFloat();
+    return (out);
 }
