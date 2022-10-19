@@ -144,7 +144,8 @@ const Fixed& Fixed::min(const Fixed &c1, const Fixed &c2) {
         return (c2);
 }
 
-
+/**********************************************/
+/*          convert toInt && toFloat          */
 /**********************************************/
 
 int   Fixed::toInt( void ) const {
@@ -155,7 +156,10 @@ float Fixed::toFloat( void ) const {
     return (float)this->rawBits / (1 << Fixed::fractBits);
 }
 
-// overload function << operator
+/**********************************************/
+/*       overload function << operator        */
+/**********************************************/
+
 std::ostream& operator<<(std::ostream& out, const Fixed &Copy) {
     out << Copy.toFloat();
     return out;
