@@ -42,25 +42,44 @@ void    TestOperators() {
         std::cout << "Object3 is not equal to Object4!" << std::endl;
 }
 
+void OverloadMemberTest() {
+    Fixed test1(15.01f);
+    Fixed test2(14.01f);
+    std::cout << Fixed::max( test1, test2 ) << std::endl;
+
+    Fixed const test3(15.01f);
+    Fixed const test4(14.01f);
+    std::cout << Fixed::max( test3, test4 ) << std::endl;
+
+    Fixed test5(15.01f);
+    Fixed test6(14.01f);
+    std::cout << Fixed::min( test5, test6 ) << std::endl;
+
+    Fixed const test7(15.01f);
+    Fixed const test8(14.01f);
+    std::cout << Fixed::min( test7, test8 ) << std::endl;
+}
+
 void    StandardTest() {
-    // Fixed a;
-    // Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+    Fixed a;
+    Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 
 
-    // std::cout << a << std::endl;
-    // std::cout << ++a << std::endl;
-    // std::cout << a << std::endl;
-    // std::cout << a++ << std::endl;
-    // std::cout << a << std::endl;
+    std::cout << a << std::endl;
+    std::cout << ++a << std::endl;
+    std::cout << a << std::endl;
+    std::cout << a++ << std::endl;
+    std::cout << a << std::endl;
 
-    // std::cout << b << std::endl;
+    std::cout << b << std::endl;
 
-    // std::cout << Fixed::max( a, b ) << std::endl;
+    std::cout << Fixed::max( a, b ) << std::endl;
 }
 
 int main( void ) {
 
-    // StandardTest();
+    StandardTest();
+    // OverloadMemberTest();
     // TestOperators();
 
     return 0;

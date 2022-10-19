@@ -15,25 +15,30 @@ class Fixed
         ~Fixed();
         Fixed& operator=(const Fixed &Copy);
 
-        bool operator>(const Fixed &Copy);
-        bool operator<(const Fixed &Copy);
-        bool operator>=(const Fixed &Copy);
-        bool operator<=(const Fixed &Copy);
-        bool operator==(const Fixed &Copy);
-        bool operator!=(const Fixed &Copy);
+        bool operator>(const Fixed &Copy) const;
+        bool operator<(const Fixed &Copy) const;
+        bool operator>=(const Fixed &Copy) const;
+        bool operator<=(const Fixed &Copy) const;
+        bool operator==(const Fixed &Copy) const;
+        bool operator!=(const Fixed &Copy) const;
         
-        Fixed operator+(const Fixed c1);
-        Fixed operator-(const Fixed c1);
-        Fixed operator*(const Fixed c1);
-        Fixed operator/(const Fixed c1);
+        Fixed operator+(const Fixed c1) const;
+        Fixed operator-(const Fixed c1) const;
+        Fixed operator*(const Fixed c1) const;
+        Fixed operator/(const Fixed c1) const;
 
         Fixed operator++();
         Fixed operator--();
         Fixed operator++(int);
         Fixed operator--(int);
 
-        int     toInt( void ) const;
-        float   toFloat( void ) const;
+        static Fixed& max(Fixed &c1, Fixed &c2);
+        static Fixed& min(Fixed &c1, Fixed &c2);
+        static const Fixed& max(const Fixed &c1, const Fixed &c2);
+        static const Fixed& min(const Fixed &c1, const Fixed &c2);
+
+        int         toInt( void ) const;
+        float       toFloat( void ) const;
 
     private:
         int               rawBits;
