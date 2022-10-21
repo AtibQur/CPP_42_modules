@@ -79,9 +79,9 @@ void    StandardTest() {
 
 int main( void ) {
 
-    StandardTest();
+    // StandardTest();
     // OverloadMemberTest();
-    // TestOperators();
+    TestOperators();
 
     return 0;
 }
