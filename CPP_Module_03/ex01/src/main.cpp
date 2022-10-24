@@ -30,7 +30,7 @@ void    testScavTraps() {
     delete sab;
 }
 
-//Creating ScavTraps and deleting them
+//Creating ScavTraps and delete them
 void    createScavTraps() {
     ScavTrap *bas = new ScavTrap();
     std::cout << std::endl;
