@@ -1,4 +1,4 @@
-NAME		= diamondtrap
+NAME		= scavtrap
 
 CC			= c++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98

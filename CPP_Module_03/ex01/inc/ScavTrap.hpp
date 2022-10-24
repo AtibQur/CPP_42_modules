@@ -3,6 +3,7 @@
 
 #include "../inc/ClapTrap.hpp"
 
+// Class ClapTrap is inherinced by ScavTrap
 class ScavTrap : public ClapTrap
 {
     public:
