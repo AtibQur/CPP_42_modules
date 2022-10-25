@@ -1,12 +1,13 @@
-#include "../inc/FragTrap.hpp"
+#include "../inc/DiamondTrap.hpp"
 
-//Testing FragTraps
-void    testFragTraps() {
-    FragTrap *bas = new FragTrap();
+//Testing DiamondTraps
+void    testDiamondTraps() {
+    DiamondTrap *bas = new DiamondTrap();
     std::cout << std::endl;
-    FragTrap *mar = new FragTrap("Mar");
+    DiamondTrap *mar = new DiamondTrap("Mar");
     std::cout << std::endl;
-    FragTrap *sab = new FragTrap(*bas);
+    DiamondTrap *sab = new DiamondTrap(*bas);
+    std::cout << std::endl;
     std::cout << std::endl;
 
     bas->attack("Testobject 1");
@@ -22,24 +23,24 @@ void    testFragTraps() {
     mar->takeDamage(200);
     sab->takeDamage(25);
     std::cout << std::endl;
-    bas->highFivesGuys();
-    mar->highFivesGuys();
-    sab->highFivesGuys();
+    bas->whoAmI();
+    mar->whoAmI();
+    sab->whoAmI();
     std::cout << std::endl;
     delete bas;
     delete mar;
     delete sab;
 }
 
-//Creating FragTraps and delete them
-void    createFragTraps() {
-    FragTrap *bas = new FragTrap();
+//Creating DiamondTraps and delete them
+void    createDiamondTraps() {
+    DiamondTrap *bas = new DiamondTrap();
     std::cout << std::endl;
 
-    FragTrap *mar = new FragTrap("Mar");
+    DiamondTrap *mar = new DiamondTrap("Mar");
     std::cout << std::endl;
 
-    FragTrap *sab = new FragTrap(*bas);
+    DiamondTrap *sab = new DiamondTrap(*bas);
     std::cout << std::endl;
 
     delete bas;
@@ -48,7 +49,7 @@ void    createFragTraps() {
 }
 
 int main(void) {
-    createFragTraps();
-    // testFragTraps();
+    // createDiamondTraps();
+    testDiamondTraps();
     return 0;
 }
