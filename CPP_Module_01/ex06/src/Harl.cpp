@@ -32,13 +32,10 @@ void    Harl::complain(std::string level) {
     {
         case 0:
             (this->*(ArrayOfLevels[0]))();
-            break;
         case 1:
             (this->*(ArrayOfLevels[1]))();
-            break;
         case 2:
             (this->*(ArrayOfLevels[2]))();
-            break;
         case 3:
             (this->*(ArrayOfLevels[3]))();
             break;

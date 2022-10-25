@@ -27,6 +27,7 @@ int	Sed::CheckString(std::string line, std::string toFind) {
 }
 
 void    Sed::ReplaceString(char **argv) {
+
     std::string     line;
     std::fstream    file;
     std::ofstream   fileReplaced("text.replace");
