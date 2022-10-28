@@ -48,7 +48,7 @@ void    createFragTraps() {
 }
 
 int main(void) {
-    createFragTraps();
-    // testFragTraps();
+    // createFragTraps();
+    testFragTraps();
     return 0;
 }

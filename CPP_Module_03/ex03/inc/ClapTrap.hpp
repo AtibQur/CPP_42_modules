@@ -9,7 +9,7 @@ class ClapTrap
         ClapTrap();
         ClapTrap(std::string name);
         ClapTrap(const ClapTrap& other);
-        ~ClapTrap();
+        virtual ~ClapTrap();
         ClapTrap& operator=(const ClapTrap& other);
 
         void    attack(const std::string& target);

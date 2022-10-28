@@ -6,19 +6,19 @@
 
 DiamondTrap::DiamondTrap() {
     this->name = "Default";
-    this->ClapTrap::name = this->name.append("_clap_name");
-    this->hitpoints = 100;
-    this->energypoints = 50;
-    this->attackdmg = 30;
+    this->ClapTrap::name = name.append("_clap_name");
+    this->hitpoints = FragTrap::hitpoints;
+    this->energypoints = ScavTrap::energypoints;
+    this->attackdmg = FragTrap::attackdmg;
     std::cout << "DiamondTrap " << this->name << " has been created." << std::endl;
 }
 
 DiamondTrap::DiamondTrap(std::string name) {
     this->name = name;
     this->ClapTrap::name = name.append("_clap_name");
-    this->hitpoints = 100;
-    this->energypoints = 50;
-    this->attackdmg = 30;
+    this->hitpoints = FragTrap::hitpoints;
+    this->energypoints = ScavTrap::energypoints;
+    this->attackdmg = FragTrap::attackdmg;
     std::cout << "DiamondTrap " << this->name << " has been created." << std::endl;
 }
 

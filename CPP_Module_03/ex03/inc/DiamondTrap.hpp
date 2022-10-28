@@ -20,6 +20,4 @@ class DiamondTrap : public FragTrap, public ScavTrap {
         std::string name;
 };
 
-
-
 #endif

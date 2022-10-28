@@ -2,12 +2,11 @@
 
 //Testing DiamondTraps
 void    testDiamondTraps() {
-    DiamondTrap *bas = new DiamondTrap();
+    DiamondTrap *bas = new DiamondTrap("Tal");
     std::cout << std::endl;
     DiamondTrap *mar = new DiamondTrap("Mar");
     std::cout << std::endl;
-    DiamondTrap *sab = new DiamondTrap(*bas);
-    std::cout << std::endl;
+    DiamondTrap *sab = new DiamondTrap("Lab");
     std::cout << std::endl;
 
     bas->attack("Testobject 1");
@@ -51,5 +50,6 @@ void    createDiamondTraps() {
 int main(void) {
     // createDiamondTraps();
     testDiamondTraps();
+
     return 0;
 }
