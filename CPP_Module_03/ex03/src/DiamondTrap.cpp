@@ -6,7 +6,7 @@
 
 DiamondTrap::DiamondTrap() {
     this->name = "Default";
-    this->ClapTrap::name = name.append("_clap_name");
+    this->ClapTrap::name = std::string("Default").append("_clap_name");
     this->hitpoints = FragTrap::hitpoints;
     this->energypoints = ScavTrap::energypoints;
     this->attackdmg = FragTrap::attackdmg;
