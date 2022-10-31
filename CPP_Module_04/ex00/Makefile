@@ -3,7 +3,10 @@ NAME		= animals
 CC			= c++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 
-SRCS		= 	./src/main.cpp
+SRCS		= 	./src/main.cpp \
+				./src/Animal.cpp \
+				./src/Dog.cpp \
+				./src/Cat.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 
