@@ -9,7 +9,7 @@ Animal::Animal() {
 Animal::Animal(const Animal& other) {
     *this = other;
 
-    std::cout << "Animal: created with copy constructor" << std::endl;
+    std::cout << "Animal: created with copy constructor." << std::endl;
 }
 
 Animal::~Animal() {

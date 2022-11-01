@@ -9,7 +9,7 @@ Cat::Cat() {
 Cat::Cat(const Cat& other) {
     *this = other;
 
-    std::cout << "Cat: created with copy constructor" << std::endl;
+    std::cout << "Cat: created with copy constructor." << std::endl;
 }
 
 Cat::~Cat() {
@@ -18,12 +18,12 @@ Cat::~Cat() {
 
 Cat& Cat::operator=(const Cat& other) {
     this->_type = other._type;
-    std::cout << this->_type << " has been created with the copy and assignment operator" << std::endl;
+    std::cout << this->_type << " has been created with the copy and assignment operator." << std::endl;
     return *this;
 }
 
 void    Cat::makeSound() const {
-    std::cout << "meow, mow, mrow, mrrr, prr, prrt, hh, mrrrrrrrrrrawr, mew, rrrr, e-e-e-e-e-e" << std::endl;
+    std::cout << "meow, mow, mrow, mrrr, prr, prrt, hh, mrrrrrrrrrrawr." << std::endl;
 }
 
 const std::string& Cat::getType() const {
