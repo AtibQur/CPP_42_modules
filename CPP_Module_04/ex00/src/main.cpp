@@ -42,6 +42,6 @@ void    testAnimals() {
 
 int main() {
     testAnimals();
-    testWrongAnimals();
+    // testWrongAnimals();
     return 0;
 }
