@@ -12,7 +12,8 @@ class Brain
 
         Brain& operator=(const Brain& other);
 
-        std::string _ideas[100];
+        static const int ideasN = 100;
+        std::string _ideas[ideasN];
 };
 
 

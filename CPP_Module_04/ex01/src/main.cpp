@@ -6,13 +6,47 @@
 #include "../inc/Brain.hpp"
 
 int main() {
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
+
+    std::cout << "=============== CREATING ANIMALS ===================" << std::endl;
     std::cout << std::endl;
+    Dog* dog = new Dog();
+    Cat* cat = new Cat();
+    std::cout << std::endl;
+    std::cout << "====================================================" << std::endl;
 
+    std::cout << "========== CREATING ANIMALS IDEAS ==================" << std::endl;
+    std::cout << std::endl;
+    dog->getBrain()->_ideas[0] = "Dog likes playing in the grass.";
+    dog->getBrain()->_ideas[1] = "Dog jumps in the water.";
+    cat->getBrain()->_ideas[0] = "Cat does not like the dog.";
+    cat->getBrain()->_ideas[1] = "Cat wants to be alone.";
 
-    delete j;//should not create a leak
-    delete i;
+    for (int i = 0; i < 2; i++) std::cout << "Dog [" << i << "]: " << dog->getBrain()->_ideas[i] << std::endl;
+    for (int i = 0; i < 2; i++) std::cout << "Cat [" << i << "]: " << cat->getBrain()->_ideas[i] << std::endl;
+    std::cout << std::endl;
+    std::cout << "====================================================" << std::endl;
+
+    std::cout << "====== CREATING NEW DOG WITH & WITHOUT COPY ========" << std::endl;
+    std::cout << std::endl;
+    Dog* dog2 = new Dog();
+    for (int i = 0; i < 2; i++) std::cout << "Dog2 [" << i << "]: " << dog2->getBrain()->_ideas[i] << std::endl;
+    *dog2 = *dog;
+    for (int i = 0; i < 2; i++) std::cout << "Dog2 [" << i << "]: " << dog2->getBrain()->_ideas[i] << std::endl;
+    std::cout << std::endl;
+    std::cout << "====================================================" << std::endl;
+
+    std::cout << "============ DELETING ANIMALS =====================" << std::endl;
+    std::cout << std::endl;
+    delete dog;//should not create a leak
+    delete cat;
+    delete dog2;
+    std::cout << std::endl;
+    std::cout << "====================================================" << std::endl;
 
     return 0;
 }
+
+// int main() {
+//     main1();
+//     system("leaks -q animals");
+// }

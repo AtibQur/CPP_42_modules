@@ -18,7 +18,7 @@ Animal::~Animal() {
 
 Animal& Animal::operator=(const Animal& other) {
     this->_type = other._type;
-    std::cout << this->_type << " has been created with copy assignement operator." << std::endl;
+    std::cout << "Animal has been created with copy assignement operator." << std::endl;
     return *this;
 }
 

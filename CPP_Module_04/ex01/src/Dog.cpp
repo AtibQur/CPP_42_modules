@@ -19,15 +19,21 @@ Dog::~Dog() {
 }
 
 Dog& Dog::operator=(const Dog& other) {
-    this->_type = other._type;
+    this->Animal::operator=(other);
+    *this->brain = *other.brain; // deep copy
+
     std::cout << this->_type << " has been created with the copy and assignment operator." << std::endl;
     return *this;
 }
 
-void    Dog::makeSound() const {
+void Dog::makeSound() const {
     std::cout << "Woof woof WOOF WoOf WOOOOF WOWOWOOOOFFFFFFF." << std::endl;
 }
 
 const std::string& Dog::getType() const {
     return this->_type;
+}
+
+Brain* Dog::getBrain() const {
+    return this->brain;
 }

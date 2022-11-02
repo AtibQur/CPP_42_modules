@@ -13,8 +13,10 @@ class Dog : virtual public Animal
         
         Dog& operator=(const Dog& other);
 
-        void    makeSound() const;
-        const   std::string& getType() const;
+        void makeSound() const;
+
+        const std::string& getType() const;
+        Brain* getBrain() const;
     private:
         Brain* brain;
 };
