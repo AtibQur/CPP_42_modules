@@ -67,6 +67,10 @@ int main() {
     std::cout << std::endl;
     std::cout << "====================================================" << std::endl;
 
+    //EX02
+    // Animal* test = new Animal();
+    // Is not possible because of private default constructor
+
     return 0;
 }
 
