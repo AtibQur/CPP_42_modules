@@ -26,12 +26,16 @@ int main() {
     std::cout << std::endl;
     std::cout << "====================================================" << std::endl;
 
-    std::cout << "====== CREATING NEW DOG WITH & WITHOUT COPY ========" << std::endl;
+    std::cout << "====== CREATING NEW DOG WITH DEEP COPY  ============" << std::endl;
     std::cout << std::endl;
     Dog* dog2 = new Dog();
     for (int i = 0; i < 2; i++) std::cout << "Dog2 [" << i << "]: " << dog2->getBrain()->_ideas[i] << std::endl;
     *dog2 = *dog;
     for (int i = 0; i < 2; i++) std::cout << "Dog2 [" << i << "]: " << dog2->getBrain()->_ideas[i] << std::endl;
+    dog->getBrain()->_ideas[1] = "Dog does not like water anymore.";
+    for (int i = 0; i < 2; i++) std::cout << "Dog [" << i << "]: " << dog->getBrain()->_ideas[i] << std::endl;
+    for (int i = 0; i < 2; i++) std::cout << "Dog2 [" << i << "]: " << dog2->getBrain()->_ideas[i] << std::endl;
+
     std::cout << std::endl;
     std::cout << "====================================================" << std::endl;
 
