@@ -8,6 +8,7 @@ Dog::Dog() {
 }
 
 Dog::Dog(const Dog& other) {
+    this->brain = new Brain();
     *this = other;
 
     std::cout << "Dog: created with copy constructor." << std::endl;

@@ -10,8 +10,10 @@ class Animal
 
         Animal& operator=(const Animal& other);
     
-        virtual void       makeSound() const;
+        virtual void       makeSound() const = 0; //interface
+
         const std::string& getType() const;
+
     protected:
         Animal();
         Animal(const Animal& other);

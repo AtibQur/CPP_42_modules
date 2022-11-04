@@ -18,5 +18,4 @@ class Animal
         std::string _type;
 };
 
-
 #endif

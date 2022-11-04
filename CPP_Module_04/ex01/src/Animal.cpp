@@ -2,7 +2,6 @@
 
 Animal::Animal() {
     _type = "Animal";
-
     std::cout << "Animal: created with default constructor." << std::endl;
 }
 

@@ -2,12 +2,13 @@
 
 Cat::Cat() {
     this->_type = "Cat";
-    this->brain = new Brain;
+    this->brain = new Brain();
 
     std::cout << "Cat: created with default constructor." << std::endl;
 }
 
 Cat::Cat(const Cat& other) {
+    this->brain = new Brain();
     *this = other;
 
     std::cout << "Cat: created with copy constructor." << std::endl;

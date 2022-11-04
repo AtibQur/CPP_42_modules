@@ -12,7 +12,7 @@ class Cat : virtual public Animal
         
         Cat& operator=(const Cat& other);
 
-        virtual void    makeSound() const;
+        void    makeSound() const;
         const   std::string& getType() const;
 };
 

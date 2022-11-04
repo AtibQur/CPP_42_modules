@@ -16,10 +16,4 @@ class Brain
         std::string _ideas[ideasN];
 };
 
-
-
-
-
-
-
 #endif

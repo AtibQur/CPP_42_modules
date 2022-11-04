@@ -48,6 +48,7 @@ int main() {
 
     const int N = 10;
     Animal *animals[N];
+    std::cout << std::endl;
 
     for (int i = 0; i < N; i++) {
         if (i < N / 2) 
@@ -55,20 +56,22 @@ int main() {
         else
             animals[i] = new Dog();
     }
+    std::cout << std::endl;
 
     for (int i = 0; i < N; i++) {
             animals[i]->makeSound();
     }
+    std::cout << std::endl;
 
     for (int i = 0; i < N; i++) {
         delete animals[i];
     }
-
     std::cout << std::endl;
     std::cout << "====================================================" << std::endl;
-
+    
     //EX02
     // Animal* test = new Animal();
+    // test->makeSound();
     // Is not possible because of private default constructor
 
     return 0;

@@ -8,6 +8,7 @@ Cat::Cat() {
 }
 
 Cat::Cat(const Cat& other) {
+    this->brain = new Brain();
     *this = other;
 
     std::cout << "Cat: created with copy constructor." << std::endl;
