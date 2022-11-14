@@ -18,7 +18,22 @@ class Bureaucrat
         int         getGrade() const;
 
         // INCREMENT/DECREMENT
-        
+        void    increment();
+        void    increment(int N);
+        void    decrement();
+        void    decrement(int N);
+
+        void    checkGrade(int grade);
+
+        // CHECK EXCEPTION
+        class GradeTooHighException : public std::exception {
+            public:
+                const char* what() const throw();
+        };
+        class GradeTooLowException : public std::exception {
+            public:
+                const char* what() const throw();
+        };
 
     private:
         const std::string _name;
