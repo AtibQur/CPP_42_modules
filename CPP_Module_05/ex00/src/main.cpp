@@ -32,6 +32,7 @@ int main() {
         std::cout << e.what() << std::endl;
     }
     delete Bie;
+    Bureaucrat *test = new Bureaucrat("YO", 1);
 
     return 0;
 }

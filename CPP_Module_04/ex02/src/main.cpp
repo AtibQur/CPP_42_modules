@@ -72,7 +72,7 @@ int main() {
     }
     std::cout << std::endl;
     std::cout << "====================================================" << std::endl;
-    
+
     //EX02
     // Animal* test = new Animal();
     // test->makeSound();
@@ -80,8 +80,3 @@ int main() {
 
     return 0;
 }
-
-// int main() {
-//     main1();
-//     system("leaks -q animals");
-// }

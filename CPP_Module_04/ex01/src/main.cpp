@@ -76,8 +76,3 @@ int main() {
 
     return 0;
 }
-
-// int main() {
-//     main1();
-//     system("leaks -q animals");
-// }
