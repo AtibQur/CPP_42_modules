@@ -73,10 +73,10 @@ int main() {
     std::cout << std::endl;
     std::cout << "====================================================" << std::endl;
 
-    //EX02
+    // //EX02
     // Animal* test = new Animal();
     // test->makeSound();
-    // Is not possible because of private default constructor
+    // // Is not possible because of private default constructor
 
     return 0;
 }
