@@ -1,6 +1,7 @@
 #include "../inc/Bureaucrat.hpp"
 
 int main() {
+
     Bureaucrat *Atib = new Bureaucrat("Atib", 15);
     try {
         std::cout << *Atib << std::endl;
@@ -16,23 +17,32 @@ int main() {
     }
     delete Atib;
 
-    std::cout << std::endl;
-
-    Bureaucrat *Bie = new Bureaucrat("Bie", 140);
+    Bureaucrat *foo = new Bureaucrat("Foo", 148);
     try {
-        std::cout << *Bie << std::endl;
-        Bie->increment();
-        Bie->increment();
-        Bie->increment();
-        std::cout << *Bie << std::endl;
-        Bie->increment(10);
-        std::cout << *Bie << std::endl;
+        std::cout << *foo << std::endl;
+        foo->increment();
+        foo->increment();
+        std::cout << *foo << std::endl;
+        foo->increment();
+        std::cout << *foo << std::endl;
     }
     catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
-    delete Bie;
-    Bureaucrat *test = new Bureaucrat("YO", 1);
+    delete foo;
+
+    /* Normal increment/decrement */
+    // Bureaucrat *test = new Bureaucrat("Bas", 5);
+    // try {
+    //     std::cout << *test << std::endl;
+    //     test->increment();
+    //     std::cout << *test << std::endl;
+    //     test->decrement(4);
+    //     std::cout << *test << std::endl;
+    // }
+    // catch (std::exception &e) {
+    //     std::cout << e.what() << std::endl;
+    // }
 
     return 0;
 }

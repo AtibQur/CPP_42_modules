@@ -4,7 +4,7 @@ CC			= c++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 
 SRCS		= 	./src/main.cpp \
-				./src/bureaucrat.cpp
+				./src/Bureaucrat.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 
