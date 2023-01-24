@@ -1,4 +1,4 @@
-NAME		= extra_forms
+NAME		= Aforms
 
 CC			= c++
 CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
@@ -6,6 +6,9 @@ CPPFLAGS	= -Wall -Werror -Wextra -std=c++98
 SRCS		= 	./src/main.cpp \
 				./src/Bureaucrat.cpp \
 				./src/Form.cpp \
+				./src/ShrubberyCreationForm.cpp \
+				./src/RobotoMyRequestForm.cpp \
+				./src/PresidentialPardonForm.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 

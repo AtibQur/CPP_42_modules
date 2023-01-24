@@ -10,6 +10,7 @@ DiamondTrap::DiamondTrap() {
     this->hitpoints = FragTrap::hitpoints;
     this->energypoints = ScavTrap::energypoints;
     this->attackdmg = FragTrap::attackdmg;
+    std::cout << this->attackdmg << " " << this->energypoints << std::endl;
     std::cout << "DiamondTrap " << this->name << " has been created." << std::endl;
 }
 

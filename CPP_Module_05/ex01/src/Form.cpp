@@ -1,11 +1,12 @@
 #include "../inc/Form.hpp"
 
 // OOCP
-Form::Form(const std::string name, int grade, int execute) :
+Form::Form(const std::string name, int grade, int execute, std::string& target) :
 	_name(name),
 	_required_sign_grade(grade),
 	_required_exec_grade(execute),
-	_signed(false) {
+	_signed(false),
+	_target(target) {
 	checkGrade(_required_exec_grade);
 	checkGrade(_required_sign_grade);
 }
