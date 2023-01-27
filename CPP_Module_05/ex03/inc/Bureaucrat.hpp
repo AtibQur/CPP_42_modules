@@ -1,11 +1,9 @@
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
-#include "../inc/Bureaucrat.hpp"
-
 #include <iostream>
 #include <stdexcept>
-#include "Form.hpp"
+#include "../inc/Form.hpp"
 
 class Form;
 
@@ -18,7 +16,7 @@ public:
 	Bureaucrat &operator=(const Bureaucrat &other);
 	virtual ~Bureaucrat();
 
-    const std::string getName(void) const;
+	const std::string getName() const;
 	int getGrade(void) const;
 
 	void incrementGrade(void);

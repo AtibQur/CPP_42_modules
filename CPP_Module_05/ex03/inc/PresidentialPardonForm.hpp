@@ -2,8 +2,8 @@
 #define PRESIDENTIALPARDONFORM_HPP
 
 #include <iostream>
-#include "../inc/Form.hpp"
 #include "../inc/Bureaucrat.hpp"
+#include "../inc/Form.hpp"
 
 class PresidentialPardonForm : public Form
 {

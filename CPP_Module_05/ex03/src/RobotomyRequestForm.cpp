@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <time.h>
 #include "../inc/RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
@@ -28,11 +30,11 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 	if (executor.getGrade() > this->getExecGrade())
 		throw Bureaucrat::GradeTooLowException();
 	srand(time(NULL));
-	std::cout << "TRRRRRRR RRRRR DDAERRRRPPRRR" << std::endl;
 	if (rand() % 2)
 		std::cout << "Robotomy failed." << std::endl;
 	else
 	{
+		std::cout << "RRRRRRRRRR ZZZZZRRZRZRRRRRZZR" << std::endl;
 		std::cout << this->getTarget() << " has been robotomized." << std::endl;
 	}
 }

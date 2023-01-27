@@ -1,7 +1,7 @@
 #include "../inc/Bureaucrat.hpp"
 #include "../inc/Form.hpp"
 
-Bureaucrat::Bureaucrat(void) {}
+Bureaucrat::Bureaucrat() {}
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 {
@@ -24,9 +24,9 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 	return (*this);
 }
 
-Bureaucrat::~Bureaucrat(void) {}
+Bureaucrat::~Bureaucrat() {}
 
-const std::string Bureaucrat::getName(void) const
+const std::string Bureaucrat::getName() const
 {
 	return (this->_name);
 }

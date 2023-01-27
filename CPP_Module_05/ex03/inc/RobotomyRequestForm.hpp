@@ -2,7 +2,7 @@
 #define ROBOTOMYREQUESTFORM_HPP
 
 #include <iostream>
-#include <cstdlib>
+#include "../inc/Bureaucrat.hpp"
 #include "../inc/Form.hpp"
 
 class RobotomyRequestForm : public Form

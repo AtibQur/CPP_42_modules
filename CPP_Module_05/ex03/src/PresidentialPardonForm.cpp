@@ -1,3 +1,4 @@
+#include <fstream>
 #include "../inc/PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)

@@ -2,7 +2,7 @@
 #define SHRUBBERYCREATIONFORM_HPP
 
 #include <iostream>
-#include <fstream>
+#include "../inc/Bureaucrat.hpp"
 #include "../inc/Form.hpp"
 
 class ShrubberyCreationForm : public Form

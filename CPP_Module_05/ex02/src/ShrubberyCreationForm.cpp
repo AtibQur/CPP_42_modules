@@ -1,33 +1,33 @@
 #include "../inc/ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm()
-    : Form("shrubbery form", 145, 137, "none")
-{}
-
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target)
-    : Form("shrubbery form", 145, 137, target) {
-    std::cout << "Shrubbery creation: form created" << std::endl;
-}
+	: Form::Form("ShrubberyCreationForm", 145, 137), _target(target) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
-    : Form(other.getName(), other.getSignGrade(), other.getExecGrade(), other.getTarget())
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : Form(other)
 {
-    *this = other;
-    std::cout << "Shrubbery creation: copy form created" << std::endl;
+	this->_target = other._target;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{}
-
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
-    std::cout << "Shrubbery creation form: operator assignement" << std::endl;
-    if (this == &other) return *this;
-    return *this;
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
+{
+	this->_target = other._target;
+	return *this;
 }
 
-void ShrubberyCreationForm::executeAction() const {
+ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
+
+std::string ShrubberyCreationForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
+void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
+    if (!this->getIsSigned())
+		throw ShrubberyCreationForm::UnsignedFormException();
+	if (executor.getGrade() > this->getExecGrade())
+        throw Bureaucrat::GradeTooLowException();
+
     std::ofstream out;
-
     out.open((this->getTarget() + "_shrubbery").c_str(), std::ofstream::in | std::ofstream::trunc);
     out << std::endl;
     out << "oxoxoo    ooxoo     " << std::endl;

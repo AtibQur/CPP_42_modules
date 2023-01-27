@@ -1,12 +1,11 @@
 #include "../inc/Form.hpp"
 
 // OOCP
-Form::Form(const std::string name, int grade, int execute, std::string& target) :
+Form::Form(const std::string name, int grade, int execute) :
 	_name(name),
 	_required_sign_grade(grade),
 	_required_exec_grade(execute),
-	_signed(false),
-	_target(target) {
+	_signed(false) {
 	checkGrade(_required_exec_grade);
 	checkGrade(_required_sign_grade);
 }
@@ -61,7 +60,7 @@ const char* Form::GradeTooLowException::what() const throw() {
 
 // SIGN FORM
 void Form::beSigned(const Bureaucrat& bureaucrat) {
-	if (bureaucrat.getGrade() < this->_required_sign_grade) {
+	if (bureaucrat.getGrade() <= this->_required_sign_grade) {
 		this->_signed = true;
 		std::cout << this->getName() << " has been signed by: " << bureaucrat.getName() << '.' << std::endl;
 	} else {
