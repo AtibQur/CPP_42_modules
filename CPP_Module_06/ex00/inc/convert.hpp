@@ -11,10 +11,10 @@ class Convert
 		std::string _data; // incoming string
 		std::string _type; // datatype
 
-		char	_char_lit;
-		int		_int_lit;
-		float	_float_lit;
-		double	_double_lit;
+		char	char_lit;
+		int		int_lit;
+		float	float_lit;
+		double	double_lit;
 	public:
 	// OOCP
 		Convert();
@@ -32,15 +32,14 @@ class Convert
 	// GETTERS
 		std::string getData() const;
 		std::string getType() const;
-		char		getChar() const;
 
 	// CONVERT DATA
 		void convertData();
-		int  convertEdges() const;
+		int  edges();
 		int  convertEdgecase();
 
 	// PRINT DATA
-		void printData() const;
+		void printData();
 
 	// EXCEPTIONS
 		class WrongInput : public std::exception

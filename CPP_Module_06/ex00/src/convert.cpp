@@ -29,7 +29,7 @@ void Convert::detectType() {
     if (checkF(_data))
         return ;
     for (int i = 0; i < dataLen; i++) {
-        if (!isdigit(_data[0]) && isprint(_data[i])) {
+        if (!isdigit(_data[i]) && _data[i] != '.' && _data[i] != '-' && _data[i] != 'f') {
             if (dataLen == 1)
                 _type = "char";
             else
@@ -43,12 +43,12 @@ void Convert::detectType() {
                 throw Convert::WrongDots();
         }
     }
+    if (!dots)
+        _type = "int";
     if (_data[dataLen - 1] == 'f')
         _type = "float";
-    else if (dots == 1)
-        _type = "double";
     else
-        _type = "int";
+        _type = "double";
 }
 
 // CHECK INCOMING DATATYPE
@@ -89,7 +89,7 @@ int Convert::checkEdgecase(std::string str) {
     return 0;
 }
 
-int Convert::convertEdges() const {
+int Convert::edges() {
     return (_data == "-inff" || _data == "+inff" || _data == "nanf" || _data == "-inf" ||
             _data == "+inf" || _data == "nan");
 }
@@ -103,51 +103,48 @@ std::string Convert::getType() const {
     return _type;
 }
 
-char Convert::getChar() const {
-    return _char_lit;
-}
 
 // CONVERT DATA
 void Convert::convertData() {
     if (_type == "char") {
-        _char_lit = _data[0];
-        _int_lit = _data[0];
-        _float_lit = static_cast<float>(_data[0]);
-        _double_lit = static_cast<double>(_data[0]);
+        char_lit = _data[0];
+        int_lit = _data[0];
+        float_lit = static_cast<float>(_data[0]);
+        double_lit = static_cast<double>(_data[0]);
     }
     if (_type == "int") {
         try {
 			if (std::stoll(_data) > 2147483647 || std::stoll(_data) < -2147483648)
-				_int_lit = 0;
+				int_lit = 0;
 			else
-				_int_lit = std::stoi(_data);
+				int_lit = std::stoi(_data);
 		} catch (std::exception &e) {}
-        _char_lit = _int_lit;
-        _float_lit = static_cast<float>(_int_lit);
-        _double_lit = static_cast<double>(_int_lit);
+        char_lit = int_lit;
+        float_lit = static_cast<float>(int_lit);
+        double_lit = static_cast<double>(int_lit);
     }
     if (_type == "float") {
-        _float_lit = std::stof(_data);
-        _char_lit = static_cast<char>(_float_lit);
-        _int_lit = static_cast<int>(_float_lit);
-        _double_lit = static_cast<double>(_float_lit);
+        float_lit = std::stof(_data);
+        char_lit = static_cast<char>(float_lit);
+        int_lit = static_cast<int>(float_lit);
+        double_lit = static_cast<double>(float_lit);
     }
     if (_type == "double") {
-        _double_lit = std::stod(_data);
-        _char_lit = static_cast<char>(_double_lit);
-        _int_lit = static_cast<int>(_double_lit);
-        _float_lit = static_cast<double>(_double_lit);
+        double_lit = std::stod(_data);
+        char_lit = static_cast<char>(double_lit);
+        int_lit = static_cast<int>(double_lit);
+        float_lit = static_cast<double>(double_lit);
     }
 }
 
 // PRINT DATA
-void Convert::printData() const {
-    std::cout << "========== INCOMING DATA TYPE: " << _type << " =========" << std::endl;
+void Convert::printData() {
+    std::cout << "INCOMING DATA TYPE: " << _type << "" << std::endl;
     int i = 0;
 	std::cout << "Char: ";
-	if (_int_lit <= 127 && _int_lit >= 0) {
-		if (isprint(_char_lit))
-			std::cout << _char_lit << std::endl;
+	if (int_lit <= 127 && int_lit >= 0) {
+		if (isprint(char_lit))
+			std::cout << char_lit << std::endl;
 		else
 			std::cout << "Non displayable" << std::endl;
 	}
@@ -163,15 +160,16 @@ void Convert::printData() const {
 		std::cout << "Impossible" << std::endl;
 		i++;
 	}
-    if (convertEdges() && !i)
+    if (edges() && !i)
         std::cout << "Impossible" << std::endl;
     else if (!i)
-        std::cout << _int_lit << std::endl;
-    std::cout << "Float: " << _float_lit;
-	if (_type == "int" || _type == "char" || (!modf(_float_lit, &_float_lit) && !convertEdges()))
+        std::cout << int_lit << std::endl;
+    std::cout << "Float: " << float_lit;
+	if (_type == "int" || _type == "char" || (!modf(float_lit, &float_lit) && !edges()))
 		std::cout << ".0";
-    std::cout << "Double " << _double_lit;
-    if (_type == "int" || _type == "char" || !convertEdges())
+    std::cout << "f" << std::endl;
+    std::cout << "Double " << double_lit;
+    if (_type == "int" || _type == "char" || (!modf(double_lit, &double_lit) && !edges()))
         std::cout << ".0";
     std::cout << std::endl;
 }
