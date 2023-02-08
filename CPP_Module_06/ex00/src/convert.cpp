@@ -1,7 +1,7 @@
 #include "../inc/convert.hpp"
 
 // OOCP
-Convert::Convert() : 
+Convert::Convert() :
     _data("unset")
  {}
 
@@ -37,7 +37,7 @@ void Convert::detectType() {
             return ;
         }
         if (_data[i] == '.') {
-            if (dots == 0)
+            if (!dots)
                 dots++;
             else
                 throw Convert::WrongDots();
@@ -45,7 +45,7 @@ void Convert::detectType() {
     }
     if (!dots)
         _type = "int";
-    if (_data[dataLen - 1] == 'f')
+    else if (_data[dataLen - 1] == 'f')
         _type = "float";
     else
         _type = "double";
@@ -114,11 +114,11 @@ void Convert::convertData() {
     }
     if (_type == "int") {
         try {
-			if (std::stoll(_data) > 2147483647 || std::stoll(_data) < -2147483648)
-				int_lit = 0;
-			else
-				int_lit = std::stoi(_data);
-		} catch (std::exception &e) {}
+            if (std::stoll(_data) > 2147483647 || std::stoll(_data) < -2147483648)
+                int_lit = 0;
+            else
+                int_lit = std::stoi(_data);
+        } catch (std::exception &e) {}
         char_lit = int_lit;
         float_lit = static_cast<float>(int_lit);
         double_lit = static_cast<double>(int_lit);
@@ -141,32 +141,32 @@ void Convert::convertData() {
 void Convert::printData() {
     std::cout << "INCOMING DATA TYPE: " << _type << "" << std::endl;
     int i = 0;
-	std::cout << "Char: ";
-	if (int_lit <= 127 && int_lit >= 0) {
-		if (isprint(char_lit))
-			std::cout << char_lit << std::endl;
-		else
-			std::cout << "Non displayable" << std::endl;
-	}
-	else
-		std::cout << "Impossible" << std::endl;
-	std::cout << "Int: ";
+    std::cout << "Char: ";
+    if (int_lit <= 127 && int_lit >= 0) {
+        if (isprint(char_lit))
+            std::cout << char_lit << std::endl;
+        else
+            std::cout << "Non displayable" << std::endl;
+    }
+    else
+        std::cout << "Impossible" << std::endl;
+    std::cout << "Int: ";
     try {
-		if (std::stoll(_data) > 2147483647 || std::stoll(_data) < -2147483648) {
-			std::cout << "Impossible" << std::endl;
-			i++;
-		}
-	} catch(std::exception &e) {
-		std::cout << "Impossible" << std::endl;
-		i++;
-	}
+        if (std::stoll(_data) > 2147483647 || std::stoll(_data) < -2147483648) {
+            std::cout << "Impossible" << std::endl;
+            i++;
+        }
+    } catch(std::exception &e) {
+        std::cout << "Impossible" << std::endl;
+        i++;
+    }
     if (edges() && !i)
         std::cout << "Impossible" << std::endl;
     else if (!i)
         std::cout << int_lit << std::endl;
     std::cout << "Float: " << float_lit;
-	if (_type == "int" || _type == "char" || (!modf(float_lit, &float_lit) && !edges()))
-		std::cout << ".0";
+    if (_type == "int" || _type == "char" || (!modf(float_lit, &float_lit) && !edges()))
+        std::cout << ".0";
     std::cout << "f" << std::endl;
     std::cout << "Double " << double_lit;
     if (_type == "int" || _type == "char" || (!modf(double_lit, &double_lit) && !edges()))

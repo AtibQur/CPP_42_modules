@@ -4,7 +4,6 @@ void	check_leaks() {
 	system ("leaks -q base");
 }
 
-
 int main() {
     atexit(check_leaks);
     std::cout << "============================================" << std::endl;
