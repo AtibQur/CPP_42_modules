@@ -32,7 +32,9 @@ int main(int, char**)
     arrString[3] = "Annyeong haseyo";
     arrString[4] = "Ohayou";
 
+    std::cout << "=================================" << std::endl;
     std::cout << "========== BASIC TEST ===========" << std::endl;
+    std::cout << "=================================" << std::endl;
     for (int i = 0; i < size; i++) {
         std::cout << "Array int: " << arrInt[i] << std::endl;
     }
@@ -51,7 +53,9 @@ int main(int, char**)
     std::cout << std::endl;
     std::cout << "=================================" << std::endl;
     std::cout << std::endl;
+    std::cout << "=================================" << std::endl;
     std::cout << "========== COPY TEST ============" << std::endl;
+    std::cout << "=================================" << std::endl;
     int* mirror = new int[size];
     srand(time(NULL));
     for (int i = 0; i < size; i++)
@@ -67,7 +71,9 @@ int main(int, char**)
     }
     std::cout << "==================================" << std::endl;
     std::cout << std::endl;
+    std::cout << "====================================" << std::endl;
     std::cout << "========= EXCEPTION TEST ===========" << std::endl;
+    std::cout << "====================================" << std::endl;
     try
     {
         std::cout << "Array char: " << arrChar[1] << std::endl;
@@ -91,7 +97,7 @@ int main(int, char**)
     {
         std::cerr << e.what() << '\n';
     }
-    std::cout << "=====================================" << std::endl;
+    std::cout << "====================================" << std::endl;
 
     delete[] mirror;
     return 0;
