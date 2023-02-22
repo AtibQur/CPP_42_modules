@@ -2,35 +2,46 @@
 #define SPAN_HPP
 
 #include <iostream>
-#include <numeric>
 #include <vector>
-#include <stdexcept>
-#include <algorithm>
+#include <exception>
+#include <numeric> // std::adjacent_difference
 
 class Span
 {
     private:
-        std::vector<int>data_;
-        unsigned int size_;
+        std::vector<int>        _values;
+        const unsigned int     _maxSize;
 
     public:
-        Span(unsigned int N);
+        // OOCF
+        Span();
+        Span(unsigned int n);
+        Span(const Span& other);
+        Span& operator=(const Span& other);
         ~Span();
 
-        int shortestSpan();
-        int longestSpan();
+        // GETTERS/SETTERS
+        std::vector<int> getValues() const;
+        unsigned int getMaxSize() const;
+
         void addNumber(int val);
+        int longestSpan();
+        int shortestSpan();
 
-    // exceptions
-    class FullSpanException : public std::exception {
-        public:
-            const char* what() const throw();
-    };
+        // EXCEPTIONS
+        class FullSpanException : public std::exception
+        {
+            public:
+                const char *what() const throw() { return "Error: Span is full"; }
+        };
+    
+        class NoSpanException : public std::exception
+        {
+            public:
+                const char *what() const throw() { return "Error: Span is empty"; }
+        };
 
-    class NoSpanException : public std::exception {
-        public:
-            const char* what() const throw();
-    };
 };
+
 
 #endif

@@ -1,52 +1,45 @@
 #include "../inc/Span.hpp"
 
- Span::Span(unsigned int N) : data_(N), size_(0)
+Span::Span() : 
+    _maxSize(0) 
+{}
+
+Span::Span(unsigned int n) :
+    _maxSize(n)
+{}
+
+Span::Span(const Span& other) : _maxSize(other._maxSize)
 {
-    std::cout << "Span constructor made" << std::endl;
+    *this = other;
 }
+
+Span& Span::operator=(const Span& other) {
+    this->_values = other._values;
+    return *this;
+}
+
+Span::~Span()
+{}
 
 void Span::addNumber(int val) {
-    if (size_ < data_.size()) {
-        data_[size_++] = val;
-    } else {
-        throw Span::FullSpanException(); 
-    }
-}
-
-Span::~Span() {
-    std::cout << "Span destructor called" << std::endl;
-}
-
-int Span::shortestSpan() {
-    if (data_.size() <= 1)
-        throw Span::NoSpanException();
-    std::vector<int> tmp = data_;
-	std::sort(tmp.begin(), tmp.end());
-	std::adjacent_difference(tmp.begin(), tmp.end(), tmp.begin());
-	return (*std::min_element(tmp.begin() + 1, tmp.end()));
+    if (this->_values.size() >= this->_maxSize)
+        throw FullSpanException();
+    this->_values.push_back(val);
 }
 
 int Span::longestSpan() {
-    if (data_.size() <= 1)
-        throw Span::NoSpanException();
-    int lowestNum = data_[0];
-    int highestNum = data_[0];
-    for (unsigned int i = 0; i < size_; i++) {
-        if (data_[i] < lowestNum)
-            lowestNum = data_[i];
-    }
-    for (unsigned int i = 0; i < size_; i++) {
-        if (data_[i] > highestNum)
-            highestNum = data_[i];
-    }
-    lowestNum = highestNum - lowestNum;
-    return lowestNum;
+    if (this->_values.size() <= 1)
+        throw NoSpanException();
+    int max = *max_element(_values.begin(), _values.end());
+    int min = *min_element(_values.begin(), _values.end());
+    return max - min;
 }
 
-const char* Span::FullSpanException::what() const throw() {
-    return ("Span is full");
-}
-
-const char* Span::NoSpanException::what() const throw() {
-    return ("No span size found");
+int Span::shortestSpan() {
+    if (this->_values.size() <= 1)
+        throw NoSpanException();
+    std::vector<int> temp = this->_values;
+    std::sort(temp.begin(), temp.end());
+    std::adjacent_difference(temp.begin(), temp.end(), temp.begin());
+    return *std::min_element(temp.begin(), temp.end());
 }
