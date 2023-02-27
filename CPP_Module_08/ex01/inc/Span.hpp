@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <exception>
+#include <iterator>
 #include <numeric> // std::adjacent_difference
 
 class Span
@@ -21,13 +22,15 @@ class Span
         ~Span();
 
         // GETTERS/SETTERS
-        std::vector<int> getValues() const;
+        unsigned int getValuesSize() const;
         unsigned int getMaxSize() const;
 
         void addNumber(int val);
         int longestSpan();
         int shortestSpan();
 
+        void addMore(int val);
+        std::vector<int> getRandomVector(int val);
         // EXCEPTIONS
         class FullSpanException : public std::exception
         {
@@ -41,6 +44,11 @@ class Span
                 const char *what() const throw() { return "Error: Span is empty"; }
         };
 
+        int operator[](unsigned int i) {
+            if (i >= _maxSize)
+                throw std::out_of_range("Index out of bound");
+            return (i);
+        }
 };
 
 

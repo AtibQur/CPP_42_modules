@@ -1,10 +1,5 @@
 #include "../inc/Span.hpp"
 
-// AFMAKEN!!!
-// Of course, you will write your own tests and they will be way more thorough than the
-// ones below. Test your Span at least with a minimum of 10 000 numbers. More would be
-// even better.
-
 int main()
 {
     Span sp = Span(5);
@@ -15,5 +10,15 @@ int main()
     sp.addNumber(11);
     std::cout << sp.shortestSpan() << std::endl;
     std::cout << sp.longestSpan() << std::endl;
+
+    Span v1 = Span(15000);
+    try {
+        v1.addMore(12000);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
+    std::cout << v1.shortestSpan() << std::endl;
+    std::cout << v1.longestSpan() << std::endl;
+
     return 0;
 }
