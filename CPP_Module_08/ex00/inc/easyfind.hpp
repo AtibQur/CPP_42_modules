@@ -2,7 +2,7 @@
 #define EASYFIND_HPP
 
 #include <iostream>
-#include <iterator>  
+#include <iterator>
 #include <vector>
 
 class notFoundException: public std::exception

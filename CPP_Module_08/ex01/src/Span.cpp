@@ -60,7 +60,6 @@ void Span::addMore(int val) {
 
     for (it = toAdd.begin(); it != toAdd.end(); ++it) {
         this->_values.push_back(*it);
-        std::cout << *it << std::endl;
     }
 }
 

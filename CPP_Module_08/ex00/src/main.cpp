@@ -11,7 +11,6 @@ void displayVector(std::vector<int>& nums) {
 
 int main() {
     std::vector<int> nums(N);
-    std::vector<int>::iterator it;
 
     for (unsigned int i = 0; i < nums.size(); i++)
         nums[i] = i;
