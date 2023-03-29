@@ -9,7 +9,7 @@ void	WelcomeMessage(void) {
 }
 
 int	main(void) {
-	PhoneBook 	phonebook;
+	PhoneBook 	phonebook;0
 	std::string	option;
 	int			i = 0;
 
