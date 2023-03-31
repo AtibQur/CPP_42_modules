@@ -9,7 +9,8 @@ int main(int argc, char **argv) {
     try
     {
         BitcoinExchange BTC(argv[1]);
-        BTC.loadfile();
+        BTC.loadFile();
+        // BTC.readDatabase();
     }
     catch(const std::exception& e)
     {

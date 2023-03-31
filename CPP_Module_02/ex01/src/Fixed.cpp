@@ -9,7 +9,7 @@ Fixed::Fixed() {
 // Const integer value constructor, bitshift to get right integer number
 Fixed::Fixed(const int bitValue) {
     std::cout << "Int constructor called" << std::endl;
-    this->fixedPointNum = bitValue << this->fractBits;
+    this->fixedPointNum = bitValue << 8;
 }
 
 // Const float value constructor, use bitshift to get float number
