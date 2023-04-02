@@ -65,7 +65,7 @@ void BitcoinExchange::checkSyntax(std::string line) {
     std::string         date;
 
     checkDate(line.substr(0, 10));
-    // checkValue(line.substr(11, line.size() - 1));
+    checkValue(line.substr(11, line.size() - 1));
 }
 
 void BitcoinExchange::checkDate(std::string date) {
@@ -76,13 +76,24 @@ void BitcoinExchange::checkDate(std::string date) {
     if (year.size() != 4 || month.size() != 2 || day.size() != 2)
         throw std::invalid_argument("Invalid date");
     if (date[4] != '-' || date[7] != '-' || date[10] != '\0')
-        throw std::invalid_argument("Invalid date1");
+        throw std::invalid_argument("Invalid date");
     if (std::stoi(year) > 2022 || std::stoi(year) < 2009)
         throw std::invalid_argument("Invalid year");
     if (std::stoi(month) > 12 || std::stoi(month) < 1)
         throw std::invalid_argument("Invalid month");
     if (std::stoi(day) > 31 || std::stoi(day) < 1)
         throw std::invalid_argument("Invalid day");
+}
+
+void BitcoinExchange::checkValue(std::string value) {
+    std::string svalue = value.substr(2, value.size() - 1);
+
+    if (value[0] != '|' || value[1] != ' ')
+        throw std::invalid_argument("Invalid value");
+    if (std::stof(svalue) < 0)
+        throw std::invalid_argument("Invalid value");
+    if (std::stof(svalue) > 2147483647)
+        throw std::invalid_argument("Invalid value");
 }
 
 /*===========================================UTILS=============================================*/

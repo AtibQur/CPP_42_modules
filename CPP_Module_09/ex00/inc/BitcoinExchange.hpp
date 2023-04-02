@@ -34,6 +34,7 @@ class BitcoinExchange {
         void checkSyntax(std::string line);
         void checkDate(std::string output);
         void checkValue(std::string value);
+        bool contains_only_alpha(const std::string& str);
 
         void readDatabase();
 };
