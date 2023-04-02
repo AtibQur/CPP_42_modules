@@ -10,7 +10,6 @@ int main(int argc, char **argv) {
     {
         BitcoinExchange BTC(argv[1]);
         BTC.loadFile();
-        // BTC.readDatabase();
     }
     catch(const std::exception& e)
     {

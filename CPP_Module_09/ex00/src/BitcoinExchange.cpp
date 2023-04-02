@@ -54,7 +54,7 @@ bool BitcoinExchange::loadFile() {
     getline(file, line);
     while (std::getline(file, line)) {
         checkSyntax(line);
-        // print output
+    //     // print output
     }
     file.close();
     return true;
@@ -63,19 +63,31 @@ bool BitcoinExchange::loadFile() {
 // CHECK IF SYNTAX IS CORRECT FROM FILE AND COMPARE WITH DATABASE
 void BitcoinExchange::checkSyntax(std::string line) {
     std::string         date;
-    std::string         value;
 
-    date = line.substr(0, 10);
-    value = line.substr(11, line.size() - 1);
+    checkDate(line.substr(0, 10));
+    // checkValue(line.substr(11, line.size() - 1));
+}
 
-    checkDate(date);
-    checkValue(value);
+void BitcoinExchange::checkDate(std::string date) {
+    std::string year = date.substr(0, 4);
+    std::string month = date.substr(5, 2);
+    std::string day = date.substr(8, 2);
+
+    if (year.size() != 4 || month.size() != 2 || day.size() != 2)
+        throw std::invalid_argument("Invalid date");
+    if (date[4] != '-' || date[7] != '-' || date[10] != '\0')
+        throw std::invalid_argument("Invalid date1");
+    if (std::stoi(year) > 2022 || std::stoi(year) < 2009)
+        throw std::invalid_argument("Invalid year");
+    if (std::stoi(month) > 12 || std::stoi(month) < 1)
+        throw std::invalid_argument("Invalid month");
+    if (std::stoi(day) > 31 || std::stoi(day) < 1)
+        throw std::invalid_argument("Invalid day");
 }
 
 /*===========================================UTILS=============================================*/
 // PRINT DATABASE CONTENTS
 void BitcoinExchange::readDatabase() {
-
     for (std::map<std::string, float>::iterator it = _database.begin(); it != _database.end(); ++it) {
         std::cout << it->first << " => " << it->second << '\n';
     }
