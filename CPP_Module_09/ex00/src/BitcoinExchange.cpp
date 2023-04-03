@@ -54,7 +54,7 @@ bool BitcoinExchange::loadFile() {
     getline(file, line);
     while (std::getline(file, line)) {
         checkSyntax(line);
-    //     // print output
+        printOutput(line);
     }
     file.close();
     return true;
@@ -62,8 +62,6 @@ bool BitcoinExchange::loadFile() {
 
 // CHECK IF SYNTAX IS CORRECT FROM FILE AND COMPARE WITH DATABASE
 void BitcoinExchange::checkSyntax(std::string line) {
-    std::string         date;
-
     checkDate(line.substr(0, 10));
     checkValue(line.substr(11, line.size() - 1));
 }
@@ -92,8 +90,46 @@ void BitcoinExchange::checkValue(std::string value) {
         throw std::invalid_argument("Invalid value");
     if (std::stof(svalue) < 0)
         throw std::invalid_argument("Invalid value");
-    if (std::stof(svalue) > 2147483647)
+    if (std::stof(svalue) > 1000)
         throw std::invalid_argument("Invalid value");
+}
+
+void BitcoinExchange::printOutput(std::string line) {
+    std::string         date;
+    std::string         value;
+    float               output;
+    float               fvalue;
+    float               fexchangeRate = 0.0;
+
+    date = line.substr(0, 10);
+    value = line.substr(11, line.size() - 1);
+
+    date = checkSpecificDate(date);
+    fvalue = std::stof(value.substr(2, value.size() - 1));
+
+    fexchangeRate = findExchangeRate(date);
+    output = (fvalue * fexchangeRate);
+
+    std::cout << date << " => " << fvalue << " = " << output << std::endl;
+}
+
+// FIND EXCHANGE RATE FROM DATABASE
+float BitcoinExchange::findExchangeRate(std::string date) {
+    std::map<std::string, float>::iterator it = _database.find(date);
+    if (it == _database.end())
+        throw std::invalid_argument("Invalid date");
+    return it->second;
+}
+
+std::string BitcoinExchange::checkSpecificDate(std::string date) {
+    std::map<std::string, float>::iterator it;
+
+    it = _database.find(date);
+    if (it == _database.end()) {
+        it = _database.lower_bound(date);
+        it--;
+    }
+    return it->first;
 }
 
 /*===========================================UTILS=============================================*/

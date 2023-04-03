@@ -35,6 +35,9 @@ class BitcoinExchange {
         void checkDate(std::string output);
         void checkValue(std::string value);
         bool contains_only_alpha(const std::string& str);
+        void printOutput(std::string line);
+        float findExchangeRate(std::string date);
+        std::string checkSpecificDate(std::string date);
 
         void readDatabase();
 };
