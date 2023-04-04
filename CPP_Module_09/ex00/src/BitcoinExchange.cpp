@@ -63,11 +63,16 @@ void BitcoinExchange::printOutput(std::string line) {
     std::string         date;
     std::string         value;
     float               output;
-    float               fvalue;
+    float               fvalue = 0.0;
     float               fexchangeRate = 0.0;
 
     date = line.substr(0, 10);
     value = line.substr(11, line.size() - 1);
+
+    if (checkDate(date) != 0) {
+        std::cout << errorMessage(line) << std::endl;
+        return;
+    }
 
     date = checkSpecificDate(date);
     fvalue = std::stof(value.substr(2, value.size() - 1));
@@ -76,11 +81,10 @@ void BitcoinExchange::printOutput(std::string line) {
     output = (fvalue * fexchangeRate);
 
     if (checkValue(line.substr(11, line.size() - 1)) != 0) {
-        std::cout << date << " => " << fvalue << " = " << errorMessage(line) << std::endl;
+        std::cout << errorMessage(line) << std::endl;
         return;
-    }
-    if (checkDate(line.substr(0, 10)) != 0) {
-        std::cout << date << " => " << fvalue << " = " << errorMessage(line) << std::endl;
+    } else if (checkDate(line.substr(0, 10)) != 0) {
+        std::cout << errorMessage(line) << " => " << date << std::endl;
         return;
     }
     std::cout << date << " => " << fvalue << " = " << output << std::endl;
@@ -107,32 +111,33 @@ int BitcoinExchange::checkDate(std::string date) {
         return 4;
     if (date[4] != '-' || date[7] != '-' || date[10] != '\0')
         return 5;
-    if (std::stoi(year) > 2022 || std::stoi(year) < 2009)
-        return 6;
+    if (std::stoi(year) > 2022 || std::stoi(year) < 2009) {
+        return INVALID_YEAR;
+    }
     if (std::stoi(month) > 12 || std::stoi(month) < 1)
-        return 7;
+        return INVALID_MONTH;
     if (std::stoi(day) > 31 || std::stoi(day) < 1)
-        return 8;
+        return INVALID_DAY;
     return 0;
 }
 
 std::string BitcoinExchange::errorMessage(std::string line) {
     if (checkValue(line.substr(11, line.size() - 1)) == WRONG_VALUE)
-        return "Error: Invalid value";
+        return "Error: Invalid value.";
     if (checkValue(line.substr(11, line.size() - 1)) == NEGATIVE_VALUE)
-        return "Error: Negative value";
+        return "Error: Not a positive number.";
     if (checkValue(line.substr(11, line.size() - 1)) == TOO_BIG_VALUE)
-        return "Error: Too large a number";
+        return "Error: Too large a number.";
     if (checkDate(line.substr(0, 10)) == INVALID_DATE)
-        return "Error: Invalid date";
+        return "Error: Invalid date.";
     if (checkDate(line.substr(0, 10)) == INVALID_DATE_FORMAT)
-        return "Error: Invalid date";
+        return "Error: Invalid date.";
     if (checkDate(line.substr(0, 10)) == INVALID_YEAR)
-        return "Error: Invalid date";
+        return "Error: Invalid year.";
     if (checkDate(line.substr(0, 10)) == INVALID_MONTH)
-        return "Error: Invalid month";
+        return "Error: Invalid month.";
     if (checkDate(line.substr(0, 10)) == INVALID_DAY)
-        return "Error: Invalid day";
+        return "Error: Invalid day.";
     return line;
 }
 // FIND EXCHANGE RATE FROM DATABASE
