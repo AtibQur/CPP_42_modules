@@ -49,6 +49,7 @@ class BitcoinExchange {
         float findExchangeRate(std::string date);
         std::string checkSpecificDate(std::string date);
         std::string errorMessage(std::string date);
+        bool onlyNumbers(const std::string& str);
 
         void readDatabase();
 };

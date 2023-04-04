@@ -53,6 +53,8 @@ bool BitcoinExchange::loadFile() {
         throw FileNotOpenException();
     getline(file, line);
     while (std::getline(file, line)) {
+        if (line.empty())
+            continue;
         printOutput(line);
     }
     file.close();
@@ -73,10 +75,14 @@ void BitcoinExchange::printOutput(std::string line) {
         std::cout << errorMessage(line) << std::endl;
         return;
     }
-
     date = checkSpecificDate(date);
-    fvalue = std::stof(value.substr(2, value.size() - 1));
 
+    if (onlyNumbers(value.substr(2, value.size() - 1)) == true) {
+        fvalue = std::stof(value.substr(2, value.size() - 1));
+    } else {
+        std::cout << errorMessage(line) << std::endl;
+        return;
+    }
     fexchangeRate = findExchangeRate(date);
     output = (fvalue * fexchangeRate);
 
@@ -90,9 +96,20 @@ void BitcoinExchange::printOutput(std::string line) {
     std::cout << date << " => " << fvalue << " = " << output << std::endl;
 }
 
+bool BitcoinExchange::onlyNumbers(const std::string& str) {
+    for (unsigned int i = 0; i < str.size(); i++) {
+        if (!isdigit(str[i]) && str[i] != '.' && str[i] != '-') {
+            return false;
+        }
+    }
+    return true;
+}
+
 int BitcoinExchange::checkValue(std::string value) {
     std::string svalue = value.substr(2, value.size() - 1);
 
+    if (onlyNumbers(svalue) == false)
+        return WRONG_VALUE;
     if (value[0] != '|' || value[1] != ' ')
         return WRONG_VALUE;
     if (std::stof(svalue) < 0)
@@ -108,12 +125,11 @@ int BitcoinExchange::checkDate(std::string date) {
     std::string day = date.substr(8, 2);
 
     if (year.size() != 4 || month.size() != 2 || day.size() != 2)
-        return 4;
+        return INVALID_DATE;
     if (date[4] != '-' || date[7] != '-' || date[10] != '\0')
-        return 5;
-    if (std::stoi(year) > 2022 || std::stoi(year) < 2009) {
+        return INVALID_DATE_FORMAT;
+    if (std::stoi(year) > 2022 || std::stoi(year) < 2009)
         return INVALID_YEAR;
-    }
     if (std::stoi(month) > 12 || std::stoi(month) < 1)
         return INVALID_MONTH;
     if (std::stoi(day) > 31 || std::stoi(day) < 1)
