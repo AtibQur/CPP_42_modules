@@ -53,45 +53,10 @@ bool BitcoinExchange::loadFile() {
         throw FileNotOpenException();
     getline(file, line);
     while (std::getline(file, line)) {
-        checkSyntax(line);
         printOutput(line);
     }
     file.close();
     return true;
-}
-
-// CHECK IF SYNTAX IS CORRECT FROM FILE AND COMPARE WITH DATABASE
-void BitcoinExchange::checkSyntax(std::string line) {
-    checkDate(line.substr(0, 10));
-    checkValue(line.substr(11, line.size() - 1));
-}
-
-void BitcoinExchange::checkDate(std::string date) {
-    std::string year = date.substr(0, 4);
-    std::string month = date.substr(5, 2);
-    std::string day = date.substr(8, 2);
-
-    if (year.size() != 4 || month.size() != 2 || day.size() != 2)
-        throw std::invalid_argument("Invalid date");
-    if (date[4] != '-' || date[7] != '-' || date[10] != '\0')
-        throw std::invalid_argument("Invalid date");
-    if (std::stoi(year) > 2022 || std::stoi(year) < 2009)
-        throw std::invalid_argument("Invalid year");
-    if (std::stoi(month) > 12 || std::stoi(month) < 1)
-        throw std::invalid_argument("Invalid month");
-    if (std::stoi(day) > 31 || std::stoi(day) < 1)
-        throw std::invalid_argument("Invalid day");
-}
-
-void BitcoinExchange::checkValue(std::string value) {
-    std::string svalue = value.substr(2, value.size() - 1);
-
-    if (value[0] != '|' || value[1] != ' ')
-        throw std::invalid_argument("Invalid value");
-    if (std::stof(svalue) < 0)
-        throw std::invalid_argument("Invalid value");
-    if (std::stof(svalue) > 1000)
-        throw std::invalid_argument("Invalid value");
 }
 
 void BitcoinExchange::printOutput(std::string line) {
@@ -110,9 +75,66 @@ void BitcoinExchange::printOutput(std::string line) {
     fexchangeRate = findExchangeRate(date);
     output = (fvalue * fexchangeRate);
 
+    if (checkValue(line.substr(11, line.size() - 1)) != 0) {
+        std::cout << date << " => " << fvalue << " = " << errorMessage(line) << std::endl;
+        return;
+    }
+    if (checkDate(line.substr(0, 10)) != 0) {
+        std::cout << date << " => " << fvalue << " = " << errorMessage(line) << std::endl;
+        return;
+    }
     std::cout << date << " => " << fvalue << " = " << output << std::endl;
 }
 
+int BitcoinExchange::checkValue(std::string value) {
+    std::string svalue = value.substr(2, value.size() - 1);
+
+    if (value[0] != '|' || value[1] != ' ')
+        return WRONG_VALUE;
+    if (std::stof(svalue) < 0)
+        return NEGATIVE_VALUE;
+    if (std::stof(svalue) > 1000)
+        return TOO_BIG_VALUE;
+    return 0;
+}
+
+int BitcoinExchange::checkDate(std::string date) {
+    std::string year = date.substr(0, 4);
+    std::string month = date.substr(5, 2);
+    std::string day = date.substr(8, 2);
+
+    if (year.size() != 4 || month.size() != 2 || day.size() != 2)
+        return 4;
+    if (date[4] != '-' || date[7] != '-' || date[10] != '\0')
+        return 5;
+    if (std::stoi(year) > 2022 || std::stoi(year) < 2009)
+        return 6;
+    if (std::stoi(month) > 12 || std::stoi(month) < 1)
+        return 7;
+    if (std::stoi(day) > 31 || std::stoi(day) < 1)
+        return 8;
+    return 0;
+}
+
+std::string BitcoinExchange::errorMessage(std::string line) {
+    if (checkValue(line.substr(11, line.size() - 1)) == WRONG_VALUE)
+        return "Error: Invalid value";
+    if (checkValue(line.substr(11, line.size() - 1)) == NEGATIVE_VALUE)
+        return "Error: Negative value";
+    if (checkValue(line.substr(11, line.size() - 1)) == TOO_BIG_VALUE)
+        return "Error: Too large a number";
+    if (checkDate(line.substr(0, 10)) == INVALID_DATE)
+        return "Error: Invalid date";
+    if (checkDate(line.substr(0, 10)) == INVALID_DATE_FORMAT)
+        return "Error: Invalid date";
+    if (checkDate(line.substr(0, 10)) == INVALID_YEAR)
+        return "Error: Invalid date";
+    if (checkDate(line.substr(0, 10)) == INVALID_MONTH)
+        return "Error: Invalid month";
+    if (checkDate(line.substr(0, 10)) == INVALID_DAY)
+        return "Error: Invalid day";
+    return line;
+}
 // FIND EXCHANGE RATE FROM DATABASE
 float BitcoinExchange::findExchangeRate(std::string date) {
     std::map<std::string, float>::iterator it = _database.find(date);

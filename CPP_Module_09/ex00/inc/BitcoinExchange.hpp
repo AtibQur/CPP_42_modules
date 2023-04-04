@@ -8,6 +8,17 @@
 #include <string>
 #include <map>
 
+enum eError {
+    WRONG_VALUE = 1,
+    NEGATIVE_VALUE = 2,
+    TOO_BIG_VALUE = 3,
+    INVALID_DATE = 4,
+    INVALID_DATE_FORMAT = 5,
+    INVALID_YEAR = 6,
+    INVALID_MONTH = 7,
+    INVALID_DAY = 8
+};
+
 class BitcoinExchange {
     private:
         std::string _filename;
@@ -31,13 +42,13 @@ class BitcoinExchange {
 
         bool initDatabase();
         bool loadFile();
-        void checkSyntax(std::string line);
-        void checkDate(std::string output);
-        void checkValue(std::string value);
+        int checkDate(std::string output);
+        int checkValue(std::string value);
         bool contains_only_alpha(const std::string& str);
         void printOutput(std::string line);
         float findExchangeRate(std::string date);
         std::string checkSpecificDate(std::string date);
+        std::string errorMessage(std::string date);
 
         void readDatabase();
 };
