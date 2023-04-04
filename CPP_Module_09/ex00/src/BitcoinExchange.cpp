@@ -69,14 +69,13 @@ void BitcoinExchange::printOutput(std::string line) {
     float               fexchangeRate = 0.0;
 
     date = line.substr(0, 10);
-    value = line.substr(11, line.size() - 1);
-
-    if (checkDate(date) != 0) {
+    if (checkDate(date, line) != 0) {
         std::cout << errorMessage(line) << std::endl;
         return;
     }
-    date = checkSpecificDate(date);
+    value = line.substr(11, line.size() - 1);
 
+    date = checkSpecificDate(date);
     if (onlyNumbers(value.substr(2, value.size() - 1)) == true) {
         fvalue = std::stof(value.substr(2, value.size() - 1));
     } else {
@@ -89,7 +88,7 @@ void BitcoinExchange::printOutput(std::string line) {
     if (checkValue(line.substr(11, line.size() - 1)) != 0) {
         std::cout << errorMessage(line) << std::endl;
         return;
-    } else if (checkDate(line.substr(0, 10)) != 0) {
+    } else if (checkDate(line.substr(0, 10), line) != 0) {
         std::cout << errorMessage(line) << " => " << date << std::endl;
         return;
     }
@@ -119,11 +118,13 @@ int BitcoinExchange::checkValue(std::string value) {
     return 0;
 }
 
-int BitcoinExchange::checkDate(std::string date) {
+int BitcoinExchange::checkDate(std::string date, std::string line) {
     std::string year = date.substr(0, 4);
     std::string month = date.substr(5, 2);
     std::string day = date.substr(8, 2);
 
+    if (line.size() < 11)
+        return INVALID_DATE;
     if (year.size() != 4 || month.size() != 2 || day.size() != 2)
         return INVALID_DATE;
     if (date[4] != '-' || date[7] != '-' || date[10] != '\0')
@@ -144,15 +145,15 @@ std::string BitcoinExchange::errorMessage(std::string line) {
         return "Error: Not a positive number.";
     if (checkValue(line.substr(11, line.size() - 1)) == TOO_BIG_VALUE)
         return "Error: Too large a number.";
-    if (checkDate(line.substr(0, 10)) == INVALID_DATE)
+    if (checkDate(line.substr(0, 10), line) == INVALID_DATE)
         return "Error: Invalid date.";
-    if (checkDate(line.substr(0, 10)) == INVALID_DATE_FORMAT)
+    if (checkDate(line.substr(0, 10), line) == INVALID_DATE_FORMAT)
         return "Error: Invalid date.";
-    if (checkDate(line.substr(0, 10)) == INVALID_YEAR)
+    if (checkDate(line.substr(0, 10), line) == INVALID_YEAR)
         return "Error: Invalid year.";
-    if (checkDate(line.substr(0, 10)) == INVALID_MONTH)
+    if (checkDate(line.substr(0, 10), line) == INVALID_MONTH)
         return "Error: Invalid month.";
-    if (checkDate(line.substr(0, 10)) == INVALID_DAY)
+    if (checkDate(line.substr(0, 10), line) == INVALID_DAY)
         return "Error: Invalid day.";
     return line;
 }

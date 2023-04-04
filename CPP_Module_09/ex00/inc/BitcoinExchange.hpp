@@ -42,7 +42,7 @@ class BitcoinExchange {
 
         bool initDatabase();
         bool loadFile();
-        int checkDate(std::string output);
+        int checkDate(std::string output, std::string line);
         int checkValue(std::string value);
         bool contains_only_alpha(const std::string& str);
         void printOutput(std::string line);
