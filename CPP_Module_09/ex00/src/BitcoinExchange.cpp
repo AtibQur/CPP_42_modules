@@ -73,18 +73,18 @@ void BitcoinExchange::printOutput(std::string line) {
         std::cout << errorMessage(line) << std::endl;
         return;
     }
-    value = line.substr(11, line.size() - 1);
 
     date = checkSpecificDate(date);
+    value = line.substr(11, line.size() - 1);
     if (onlyNumbers(value.substr(2, value.size() - 1)) == true) {
         fvalue = std::stof(value.substr(2, value.size() - 1));
     } else {
         std::cout << errorMessage(line) << std::endl;
         return;
     }
+
     fexchangeRate = findExchangeRate(date);
     output = (fvalue * fexchangeRate);
-
     if (checkValue(line.substr(11, line.size() - 1)) != 0) {
         std::cout << errorMessage(line) << std::endl;
         return;
@@ -92,6 +92,7 @@ void BitcoinExchange::printOutput(std::string line) {
         std::cout << errorMessage(line) << " => " << date << std::endl;
         return;
     }
+
     std::cout << date << " => " << fvalue << " = " << output << std::endl;
 }
 
@@ -123,8 +124,8 @@ int BitcoinExchange::checkDate(std::string date, std::string line) {
     std::string month = date.substr(5, 2);
     std::string day = date.substr(8, 2);
 
-    if (line.size() < 11)
-        return INVALID_DATE;
+    if (line.size() < 12)
+        return INVALID_DATE_FORMAT;
     if (year.size() != 4 || month.size() != 2 || day.size() != 2)
         return INVALID_DATE;
     if (date[4] != '-' || date[7] != '-' || date[10] != '\0')
@@ -135,16 +136,12 @@ int BitcoinExchange::checkDate(std::string date, std::string line) {
         return INVALID_MONTH;
     if (std::stoi(day) > 31 || std::stoi(day) < 1)
         return INVALID_DAY;
+    if (std::stoi(year) % 4 != 0 && std::stoi(month) == 02 && std::stoi(day) == 29)
+        return INVALID_DAY;
     return 0;
 }
 
 std::string BitcoinExchange::errorMessage(std::string line) {
-    if (checkValue(line.substr(11, line.size() - 1)) == WRONG_VALUE)
-        return "Error: Invalid value.";
-    if (checkValue(line.substr(11, line.size() - 1)) == NEGATIVE_VALUE)
-        return "Error: Not a positive number.";
-    if (checkValue(line.substr(11, line.size() - 1)) == TOO_BIG_VALUE)
-        return "Error: Too large a number.";
     if (checkDate(line.substr(0, 10), line) == INVALID_DATE)
         return "Error: Invalid date.";
     if (checkDate(line.substr(0, 10), line) == INVALID_DATE_FORMAT)
@@ -155,6 +152,12 @@ std::string BitcoinExchange::errorMessage(std::string line) {
         return "Error: Invalid month.";
     if (checkDate(line.substr(0, 10), line) == INVALID_DAY)
         return "Error: Invalid day.";
+    if (checkValue(line.substr(11, line.size() - 1)) == WRONG_VALUE)
+        return "Error: Invalid value.";
+    if (checkValue(line.substr(11, line.size() - 1)) == NEGATIVE_VALUE)
+        return "Error: Not a positive number.";
+    if (checkValue(line.substr(11, line.size() - 1)) == TOO_BIG_VALUE)
+        return "Error: Too large a number.";
     return line;
 }
 // FIND EXCHANGE RATE FROM DATABASE
