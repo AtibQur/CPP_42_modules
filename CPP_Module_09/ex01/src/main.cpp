@@ -6,9 +6,11 @@ int main(int argc, char const **argv) {
         std::cout << "Error. Only 1 argument is allowed. Try again." << std::endl;
         return 1;
     }
-
-    RPN rpn;
-    rpn.readInput(argv[1]);
-
+    try {
+        RPN rpn;
+        rpn.readInput(argv[1]);
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
+    }
     return 0;
 }

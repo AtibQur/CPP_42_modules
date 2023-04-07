@@ -28,14 +28,28 @@ void RPN::readInput(std::string input) {
     while(std::getline(ss, token,  ' ')) {
         if (isdigit(token[0])) {
             if (_stack.size() > 2) {
-                std::cout << "Error. Too many operands." << std::endl;
-                return;
+                throw "Error. Too many operands.";
             }
             this->_stack.push(std::stod(token));
-        } 
-        // double firstToken = 
+        } else {
+            double b = _stack.top();
+            _stack.pop();
+            double a = _stack.top();
+            _stack.pop();
+            if (token == "+") {
+                _stack.push(a + b);
+            } else if (token == "-") {
+                _stack.push(a - b);
+            } else if (token == "*") {
+                _stack.push(a * b);
+            } else if (token == "/") {
+                _stack.push(a / b);
+            } else {
+                std::cout << "Error. Invalid operator." << std::endl;
+                return ;
+            }
+
+        }
+        std::cout << _stack.top() << std::endl;
     }
-
-
 }
-
