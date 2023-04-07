@@ -22,9 +22,20 @@ RPN::~RPN() {
 }
 
 void RPN::readInput(std::string input) {
-  std::stringstream ss(input);
+    std::stringstream ss(input);
+    std::string token;
 
-  // Print out the result
-  std::cout << _stack.top() << std::endl;
+    while(std::getline(ss, token,  ' ')) {
+        if (isdigit(token[0])) {
+            if (_stack.size() > 2) {
+                std::cout << "Error. Too many operands." << std::endl;
+                return;
+            }
+            this->_stack.push(std::stod(token));
+        } 
+        // double firstToken = 
+    }
+
+
 }
 
