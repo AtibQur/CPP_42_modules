@@ -3,12 +3,15 @@
 
 #include <iostream>
 #include <vector>
-#include <deque>
+#include <list>
 #include <chrono>
 #include <algorithm>
 
 class PmergeMe {
- public:
+  private:
+    std::vector<int> vec;
+    std::list<int> lst;
+  public:
     PmergeMe();
     PmergeMe(const PmergeMe& other);
     ~PmergeMe();
