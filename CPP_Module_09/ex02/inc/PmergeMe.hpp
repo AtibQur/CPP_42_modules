@@ -22,6 +22,10 @@ class PmergeMe {
     void checkInput(int argc, char **argv);
     void checkDuplicates(int argc, char **argv);
     void initNums(int argc, char **argv);
+    void mergeVec(std::vector<int>& arr, int l, int m, int r);
+    void mergeSortVec(std::vector<int>& arr, int l, int r);
+    void mergeList(std::list<int>& arr, int l, int m, int r);
+    void mergeSortList(std::list<int>& arr, int l, int r);
     void printNums();
 
     class wrongInput : public std::exception {
