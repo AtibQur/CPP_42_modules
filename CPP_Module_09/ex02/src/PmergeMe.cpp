@@ -147,14 +147,14 @@ void PmergeMe::printNums() {
     clock_t startVec = clock();
     mergeSortVec(intVec, 0, intVec.size() - 1);
     clock_t endVec = clock();
-    
+
     std::cout << "*VECTOR AFTER | ";
     for (std::vector<int>::iterator it = intVec.begin(); it != intVec.end(); it++) {
         std::cout << *it << " ";
     }
     std::cout << "|" << std::endl;
         float timeTakenVec = (float)(endVec - startVec) / CLOCKS_PER_SEC * 1000;
-        std::cout << std::fixed << std::setprecision(5) << "Time taken to sort vector: " << timeTakenVec << " ms\n";
+        std::cout << std::fixed << "Time taken to sort vector: " << timeTakenVec << " ms\n";
 
     std::cout << "LIST   BEFORE | ";
     for (std::list<int>::iterator it = intList.begin(); it != intList.end(); it++) {
