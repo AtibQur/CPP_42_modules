@@ -46,95 +46,122 @@ void PmergeMe::initNums(int argc, char **argv) {
     }
 }
 
-void PmergeMe::mergeVec(std::vector<int>& arr, int l, int m, int r) {
-    int i, j, k;
-    int n1 = m - l + 1;
-    int n2 = r - m;
-  
-    std::vector<int> L(n1);
-    std::vector<int> R(n2);
-  
-    for (i = 0; i < n1; i++)
-        L[i] = arr[l + i];
-    for (j = 0; j < n2; j++)
-        R[j] = arr[m + 1 + j];
-  
-    i = 0;
-    j = 0;
-    k = l;
-  
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
+void PmergeMe::insertionSortVec(std::vector<int>& data, int start, int end) {
+    for (int i = start + 1; i <= end; ++i) {
+        int key = data[i];
+        int j = i - 1;
+
+        while (j >= start && data[j] > key) {
+            data[j + 1] = data[j];
+            j--;
         }
-        else {
-            arr[k] = R[j];
+
+        data[j + 1] = key;
+    }
+}
+
+void PmergeMe::mergeVec(std::vector<int>& data, int start, int mid, int end) {
+    std::vector<int> left(mid - start + 1);
+    std::vector<int> right(end - mid);
+
+    for (unsigned int i = 0; i < left.size(); ++i) {
+        left[i] = data[start + i];
+    }
+
+    for (unsigned int i = 0; i < right.size(); ++i) {
+        right[i] = data[mid + 1 + i];
+    }
+
+    unsigned int i = 0, j = 0, k = start;
+
+    while (i < left.size() && j < right.size()) {
+        if (left[i] <= right[j]) {
+            data[k] = left[i];
+            i++;
+        } else {
+            data[k] = right[j];
             j++;
         }
         k++;
     }
-  
-    while (i < n1) {
-        arr[k] = L[i];
+
+    while (i < left.size()) {
+        data[k] = left[i];
         i++;
         k++;
     }
-  
-    while (j < n2) {
-        arr[k] = R[j];
+
+    while (j < right.size()) {
+        data[k] = right[j];
         j++;
         k++;
     }
 }
-  
-void PmergeMe::mergeSortVec(std::vector<int>& arr, int l, int r) {
-    if (l < r) {
-        int m = l + (r - l) / 2;
-  
-        mergeSortVec(arr, l, m);
-        mergeSortVec(arr, m + 1, r);
-  
-        mergeVec(arr, l, m, r);
-    }
-}
 
-void mergeList(std::list<int>& left, std::list<int>& right, std::list<int>& result) {
-    while (!left.empty() && !right.empty()) {
-        if (left.front() <= right.front()) {
-            result.push_back(left.front());
-            left.pop_front();
+void PmergeMe::mergeSortVec(std::vector<int>& data, int start, int end, int k) {
+    if (start < end) {
+        if (end - start + 1 <= k) {
+            insertionSortVec(data, start, end);
         } else {
-            result.push_back(right.front());
-            right.pop_front();
+            int mid = start + (end - start) / 2;
+            mergeSortVec(data, start, mid, k);
+            mergeSortVec(data, mid + 1, end, k);
+            mergeVec(data, start, mid, end);
         }
     }
+}
 
-    while (!left.empty()) {
-        result.push_back(left.front());
-        left.pop_front();
+void	PmergeMe::mergeList(std::list<int>::iterator left, std::list<int>::iterator mid, std::list<int>::iterator right){
+    std::list<int> merged;
+    std::list<int>::iterator it1 = left, it2 = mid;
+    while (it1 != mid && it2 != right){
+        if (*it1 <= *it2) {
+            merged.push_back(*it1);
+            it1++;
+        }
+        else {
+            merged.push_back(*it2);
+            it2++;
+        }
     }
-
-    while (!right.empty()) {
-        result.push_back(right.front());
-        right.pop_front();
+    while (it1 != mid) {
+        merged.push_back(*it1);
+        it1++;
+    }
+    while (it2 != right) {
+        merged.push_back(*it2);
+        it2++;
+    }
+    for (std::list<int>::iterator it = left, it3 = merged.begin(); it != right; it++, it3++) {
+        *it = *it3;
     }
 }
 
-void mergeSortList(std::list<int>& data) {
-    if (data.size() > 1) {
-        std::list<int> left, right, result;
-        std::list<int>::iterator middle = std::next(data.begin(), data.size() / 2);
-
-        left.splice(left.begin(), data, data.begin(), middle);
-        right.splice(right.begin(), data, middle, data.end());
-
-        mergeSortList(left);
-        mergeSortList(right);
-
-        mergeList(left, right, result);
-
-        data.swap(result);
+void	PmergeMe::mergeInsertionSortList(std::list<int>& lst, std::list<int>::iterator left, std::list<int>::iterator right, int k){
+	if (left != right) {
+        int size = 0;
+        std::list<int>::iterator it;
+        for (it = left; it != right; it++)
+            size++;
+        if (size <= k) {
+            for (it = left; it != right; it++) {
+                int key = *it;
+                std::list<int>::iterator it2 = it;
+                while (it2 != left && *(std::prev(it2)) > key) {
+                    *it2 = *(std::prev(it2));
+                    it2 = std::prev(it2);
+                }
+                *it2 = key;
+            }
+        }
+        else {
+            std::list<int>::iterator mid = left;
+            for (int i = 0; i < size / 2; i++)
+                ++mid;
+            mergeInsertionSortList(lst, left, mid, k);
+            mergeInsertionSortList(lst, mid, right, k);
+            mergeList(left, mid, right);
+        }
     }
 }
 
@@ -145,7 +172,7 @@ void PmergeMe::printNums() {
     }
     std::cout << "|" << std::endl;
     clock_t startVec = clock();
-    mergeSortVec(intVec, 0, intVec.size() - 1);
+    mergeSortVec(intVec, 0, intVec.size() - 1, 5);
     clock_t endVec = clock();
 
     std::cout << "*VECTOR AFTER | ";
@@ -162,7 +189,7 @@ void PmergeMe::printNums() {
     }
     std::cout << "|" << std::endl;
     clock_t startList = clock();
-    ::mergeSortList(intList);
+    mergeInsertionSortList(intList, intList.begin(), intList.end(), 5);
     clock_t endList = clock();
     std::cout << "*LIST   AFTER | ";
     for (std::list<int>::iterator it = intList.begin(); it != intList.end(); it++) {
