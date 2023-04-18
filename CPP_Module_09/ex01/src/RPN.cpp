@@ -23,22 +23,16 @@ void RPN::readInput(std::string input) {
     int i = 0;
 
     while(std::getline(ss, token,  ' ')) {
+        if (token.empty())
+            return ;
         if (token[1] != '\0') {
             std::cout << "Error: Invalid number." << std::endl;
             return ;
         }
         if (isdigit(token[0])) {
-            if (_stack.size() > 2) {
-                std::cout << "Error: Too many operands." << std::endl;
-                return ;
-            }
             this->_stack.push(std::stod(token));
             i = 1;
         } else {
-            if (_stack.size() < 2) {
-                std::cout << "Error: Too few operands." << std::endl;
-                return ;
-            }
             double b = _stack.top();
             _stack.pop();
             double a = _stack.top();
@@ -62,5 +56,8 @@ void RPN::readInput(std::string input) {
         std::cout << "Error: Can't end with an integer number." << std::endl;
         return ;
     }
-    std::cout << _stack.top() << std::endl;
+    if (_stack.size() == 1)
+        std::cout << _stack.top() << std::endl;
+    else
+        std::cout << "error" << std::endl;
 }
