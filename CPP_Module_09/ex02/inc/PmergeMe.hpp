@@ -12,7 +12,7 @@
 class PmergeMe {
  private:
     std::vector<int> intVec;
-    std::list<int> intList;
+    std::list<int> intList; 
  public:
     PmergeMe();
     PmergeMe(const PmergeMe& other);

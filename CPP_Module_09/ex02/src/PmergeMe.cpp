@@ -183,6 +183,8 @@ void PmergeMe::printNums() {
         float timeTakenVec = (float)(endVec - startVec) / CLOCKS_PER_SEC * 1000;
         std::cout << std::fixed << "Time taken to sort vector: " << timeTakenVec << " ms\n";
 
+    std::cout << std::endl;
+
     std::cout << "LIST   BEFORE | ";
     for (std::list<int>::iterator it = intList.begin(); it != intList.end(); it++) {
         std::cout << *it << " ";

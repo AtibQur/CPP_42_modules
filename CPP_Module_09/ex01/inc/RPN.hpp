@@ -9,7 +9,7 @@
 class RPN
 {
 private:
-    std::stack<double> _stack;
+    std::stack<double> _stack; //FILO
 public:
     RPN();
     RPN(RPN const &other);
