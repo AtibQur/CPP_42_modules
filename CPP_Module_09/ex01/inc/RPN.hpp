@@ -17,7 +17,7 @@ public:
     RPN &operator=(RPN const &other);
 
     void readInput(std::string input);
-
+    bool checkAmount(std::string input);
 };
 
 #endif

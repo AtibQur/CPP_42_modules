@@ -22,6 +22,10 @@ void RPN::readInput(std::string input) {
     std::string token;
     int i = 0;
 
+    if (!checkAmount(input)) {
+        std::cout << "Error: Invalid amount of numbers and operators." << std::endl;
+        exit(1);
+    }
     while(std::getline(ss, token,  ' ')) {
         if (token.empty())
             return ;
@@ -29,6 +33,7 @@ void RPN::readInput(std::string input) {
             std::cout << "Error: Invalid number." << std::endl;
             return ;
         }
+
         if (isdigit(token[0])) {
             this->_stack.push(std::stod(token));
             i = 1;
@@ -60,4 +65,33 @@ void RPN::readInput(std::string input) {
         std::cout << _stack.top() << std::endl;
     else
         std::cout << "error" << std::endl;
+}
+
+bool RPN::checkAmount(std::string input) {
+    int i = 0;
+    int j = 0;
+    int isTwo = 0;
+    std::stringstream ss(input);
+    std::string token;
+
+    while(std::getline(ss, token,  ' ')) {
+        if (isdigit(token[0]) && ss.eof())
+            return false;
+        if (isdigit(token[0])) {
+            i++;
+            isTwo++;
+        } else if (token == "+" || token == "-" || token == "*" || token == "/") {
+            if (isTwo < 2)
+                return false;
+            j++;
+        } else {
+            std::cout << "Error: Invalid number or operator." << std::endl;
+            exit(1);
+        }
+    }
+    if (i - j != 1) {
+        std::cout << "Error: Invalid amount of numbers and operators." << std::endl;
+        exit(1);
+    }
+    return true;
 }
